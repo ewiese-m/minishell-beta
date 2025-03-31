@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "minishell.h": "c",
+        "environment_management.h": "c",
+        "signal_handling.h": "c"
+    }
+}

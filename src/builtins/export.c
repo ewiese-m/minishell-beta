@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:05:53 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 23:12:42 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/01 11:39:10 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ static int	handle_export_arg(char **envp, char *arg)
 {
 	if (!is_valid_export_name(arg))
 	{
-		ft_putstr_fd("minishell: export: `", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("': not a valid identifier\n", 2);
+		//ft_putstr_fd("minishell: export: `", 2);
+		//ft_putstr_fd(arg, 2);
+		//ft_putstr_fd("': not a valid identifier\n", 2);
 		return (1);
 	}
 	if (!ft_strchr(arg, '='))
@@ -88,10 +88,12 @@ int	builtin_export(t_command *cmd, char **envp)
 		return (0);
 	}
 	status = 0;
-	for (i = 1; cmd->args[i]; i++)
+	i = 1;
+	while (cmd->args[i])
 	{
 		if (handle_export_arg(envp, cmd->args[i]) != 0)
 			status = 1;
+		i++;
 	}
 	return (status);
 }

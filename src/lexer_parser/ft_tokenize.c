@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 19:33:11 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/29 15:06:17 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:51:18 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ char	*ft_tokenize(char *str, char *input, int *index, t_env *env_list)
 		if (input[i] == '"' || input[i] == '\'')
 			str = handle_quotes(str, input, &i, env_list);
 		else if (input[i] == '$')
+		{
 			str = handle_dollar_sign(str, input, &i, env_list);
+		}
 		else
 			str = handle_regular_char(str, input, &i);
 		if (!input[i])

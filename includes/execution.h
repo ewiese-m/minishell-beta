@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:21:08 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 13:28:33 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:28:18 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,12 @@
 /* cmd_execution.c */
 int			execute_commands(t_command *cmd_list, t_env *env_list);
 int			execute_cmd_list(t_command *cmd_list, char **envp, t_env *env_list);
-void		update_exit_status(t_env *env_list, int status);
 void		free_env_array(char **env_array);
+
+/* exit_status.c */
+void		add_exit_status_var(t_env *env_list);
+void		update_exit_status(t_env *env_list, int status);
+int			get_exit_status(t_env *env_list);
 
 /* env_conversion.c */
 char		**ft_create_env_array(t_env *env_list);

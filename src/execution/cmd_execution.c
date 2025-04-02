@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:10:41 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 16:50:54 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:56:47 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	execute_commands(t_command *cmd_list, t_env *env_list)
 	if (!env_array)
 		return (1);
 	exit_status = execute_cmd_list(cmd_list, env_array, env_list);
+	update_exit_status(env_list, exit_status);
 	free_env_array(env_array);
 	return (exit_status);
 }
@@ -47,30 +48,6 @@ int	execute_cmd_list(t_command *cmd_list, char **envp, t_env *env_list)
 	free_pipeline(pipeline);
 	update_exit_status(env_list, exit_status);
 	return (exit_status);
-}
-
-/**
- * Updates the exit status in the environment list
- */
-void	update_exit_status(t_env *env_list, int status)
-{
-	t_env	*current;
-
-	if (!env_list)
-		return ;
-	current = env_list;
-	while (current)
-	{
-		if (ft_strcmp(current->key, "?") == 0)
-		{
-			if (current->value)
-				free(current->value);
-			current->value = ft_itoa(status);
-			current->exit_status = status;
-			return ;
-		}
-		current = current->next;
-	}
 }
 
 void	free_env_array(char **env_array)

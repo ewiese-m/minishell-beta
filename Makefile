@@ -65,6 +65,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/execution/cmd_execution.c \
        $(SRC_DIR)/execution/command_execution.c \
        $(SRC_DIR)/execution/env_conversion.c \
+       $(SRC_DIR)/execution/exit_status.c \
        $(SRC_DIR)/execution/pipeline_creation.c \
        $(SRC_DIR)/execution/pipeline_execution.c \
        $(SRC_DIR)/execution/pipeline_utils.c \

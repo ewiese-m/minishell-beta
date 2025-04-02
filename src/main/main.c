@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/01 23:43:21 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:58:57 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ static int	process_command(char *line, t_env *env_list, char **env_copy)
 	t_command	*cmds;
 	int			exit_status;
 
-	// char		**envps;
 	exit_status = 0;
 	if (!line || *line == '\0')
 		return (0);
@@ -32,14 +31,18 @@ static int	process_command(char *line, t_env *env_list, char **env_copy)
 	if (cmds)
 	{
 		if (ft_strcmp(cmds->command, "exit") == 0)
+		{
 			exit_status = builtin_exit(cmds);
+		}
 		else if (is_builtin(cmds->command))
 		{
-			// envps = ft_create_env_array(env_list);
 			exit_status = execute_builtin(cmds, env_copy);
+			update_exit_status(env_list, exit_status);
 		}
 		else
+		{
 			exit_status = execute_commands(cmds, env_list);
+		}
 		ft_free_cmdlist(&cmds);
 	}
 	free(line);
@@ -75,13 +78,18 @@ static void	minishell_loop(t_env *env_list, char **env_copy)
 		line = readline("minishell> ");
 		if (!line)
 		{
-			printf("exit\n");
+			//printf("exit\n");
 			break ;
 		}
 		exit_status = process_command(line, env_list, env_copy);
 		if (exit_status < 0)
 		{
-			exit(exit_status);
+			update_exit_status(env_list, -exit_status);
+			break ;
+		}
+		else
+		{
+			update_exit_status(env_list, exit_status);
 		}
 	}
 }
@@ -90,7 +98,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_env	*env_list;
 	char	**env_copy;
+	int		final_status;
 
+	final_status = 0;
 	(void)argc;
 	(void)argv;
 	env_copy = create_env_copy(envp);
@@ -101,8 +111,10 @@ int	main(int argc, char **argv, char **envp)
 		fprintf(stderr, "Error: Failed to initialize environment\n");
 		return (1);
 	}
+	add_exit_status_var(env_list);
 	minishell_loop(env_list, env_copy);
+	final_status = get_exit_status(env_list);
 	cleanup_resources(env_list);
 	free_env_copy(env_copy);
-	return (0);
+	return (final_status);
 }

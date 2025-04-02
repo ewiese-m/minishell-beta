@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:59:55 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/01 23:38:08 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:01:16 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	builtin_exit(t_command *cmd)
 {
 	int	exit_code;
 
-	ft_putstr_fd("exit\n", 2);
+	//ft_putstr_fd("exit\n", 2);
 	if (!cmd->args[1])
 	{
 		return (-1);

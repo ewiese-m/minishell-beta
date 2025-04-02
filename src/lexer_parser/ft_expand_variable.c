@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:16:26 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/29 15:16:30 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:48:28 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ char	*ft_expand_variable(char *str, t_env *env_list)
 	current = env_list;
 	if (!str)
 		return (ft_strdup("$"));
+	if (ft_strcmp(str, "?") == 0)
+	{
+		free(str);
+		while (current)
+		{
+			if (ft_strcmp(current->key, "?") == 0)
+				return (ft_strdup(current->value));
+			current = current->next;
+		}
+		return (ft_strdup("0"));
+	}
 	if (!ft_strcmp(str, "?"))
 	{
 		free(str);

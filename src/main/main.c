@@ -6,19 +6,16 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 23:04:24 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/01 23:43:21 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int			g_exit_status = 0;
-
 static void	setup_signals(void)
 {
 	signal(SIGINT, ft_signal_ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
-	rl_catch_signals = 0;
 }
 
 static int	process_command(char *line, t_env *env_list, char **env_copy)
@@ -84,7 +81,7 @@ static void	minishell_loop(t_env *env_list, char **env_copy)
 		exit_status = process_command(line, env_list, env_copy);
 		if (exit_status < 0)
 		{
-			exit(g_exit_status);
+			exit(exit_status);
 		}
 	}
 }
@@ -104,7 +101,6 @@ int	main(int argc, char **argv, char **envp)
 		fprintf(stderr, "Error: Failed to initialize environment\n");
 		return (1);
 	}
-	// g_minishell.envs = env_list;
 	minishell_loop(env_list, env_copy);
 	cleanup_resources(env_list);
 	free_env_copy(env_copy);

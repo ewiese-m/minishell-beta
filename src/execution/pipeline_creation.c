@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:13:50 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/27 16:10:14 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:42:08 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,3 @@ int	**create_pipes(int cmd_count)
 	}
 	return (pipes);
 }
-
-/**
- * Frees the pipes
-
-void	free_pipes(int **pipes, int count)
-{
-	int	i;
-
-	if (!pipes)
-		return ;
-	i = 0;
-	while (i < count)
-	{
-		if (pipes[i])
-			free(pipes[i]);
-		i++;
-	}
-	free(pipes);
-} */

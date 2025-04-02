@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:31 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/27 15:48:28 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:36:34 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	execute_pipeline(t_pipeline *pipeline, char **envp)
 	pid_t	*pids;
 	int		status;
 	int		executed_count;
+	int		i;
 
 	status = init_pipeline_execution(pipeline, &pids);
 	if (status < 2)
@@ -86,7 +87,14 @@ int	execute_pipeline(t_pipeline *pipeline, char **envp)
 		return (status);
 	}
 	executed_count = fork_and_execute_commands(pipeline, pids, envp);
-	close_all_pipes(pipeline);
+	if (pipeline->pipes)
+	{
+		for (i = 0; i < pipeline->cmd_count - 1; i++)
+		{
+			close(pipeline->pipes[i][0]);
+			close(pipeline->pipes[i][1]);
+		}
+	}
 	if (executed_count < pipeline->cmd_count)
 		return (handle_pipeline_error(pipeline, pids, executed_count));
 	return (handle_pipeline_success(pipeline, pids));

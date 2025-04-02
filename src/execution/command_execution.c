@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:56 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 13:39:08 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:14:58 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,33 +72,48 @@ int	setup_redirections(t_command *cmd, int **pipes, int cmd_index,
 /**
  * Executes a single command in the pipeline
  */
-void	execute_pipeline_command(t_pipe_exec *exec_data)
+void execute_pipeline_command(t_pipe_exec *exec_data)
 {
-	char		*executable_path;
-	int			status;
-	t_pipeline	temp_pipeline;
+    char        *executable_path;
+    int         status;
+    t_pipeline  temp_pipeline;
+    int         i;
 
-	if (setup_redirections(exec_data->cmd, exec_data->pipes,
-			exec_data->cmd_index, exec_data->cmd_count) != 0)
-	{
-		temp_pipeline.pipes = exec_data->pipes;
-		temp_pipeline.cmd_count = exec_data->cmd_count;
-		close_all_pipes(&temp_pipeline);
-		exit(1);
-	}
-	close_other_pipes(exec_data->pipes, exec_data->cmd_index,
-		exec_data->cmd_count);
-	if (is_builtin(exec_data->cmd->command))
-	{
-		status = execute_builtin(exec_data->cmd, exec_data->envp);
-		exit(status);
-	}
-	executable_path = find_executable(exec_data->cmd->command, exec_data->envp);
-	if (!executable_path)
-		exit(handle_command_not_found(exec_data->cmd->command));
-	execve(executable_path, exec_data->cmd->full_cmd, exec_data->envp);
-	free(executable_path);
-	exit(handle_execve_error(exec_data->cmd->command));
+    if (setup_redirections(exec_data->cmd, exec_data->pipes,
+            exec_data->cmd_index, exec_data->cmd_count) != 0)
+    {
+        temp_pipeline.pipes = exec_data->pipes;
+        temp_pipeline.cmd_count = exec_data->cmd_count;
+        close_all_pipes(&temp_pipeline);
+        exit(1);
+    }
+
+    // Asegurarse de cerrar todos los descriptores de archivo de pipes que este comando no necesita
+    for (i = 0; i < exec_data->cmd_count - 1; i++)
+    {
+        // Este comando necesita pipe[cmd_index-1][0] para lectura (si no es el primer comando)
+        // y pipe[cmd_index][1] para escritura (si no es el último comando)
+        // Cerrar todos los demás descriptores de archivo de pipes
+        if (i != exec_data->cmd_index - 1 || exec_data->cmd_index == 0)
+            close(exec_data->pipes[i][0]);
+        if (i != exec_data->cmd_index || exec_data->cmd_index == exec_data->cmd_count - 1)
+            close(exec_data->pipes[i][1]);
+    }
+
+    // Tu código existente para close_other_pipes puede ser reemplazado por el bloque anterior
+    // close_other_pipes(exec_data->pipes, exec_data->cmd_index, exec_data->cmd_count);
+
+    if (is_builtin(exec_data->cmd->command))
+    {
+        status = execute_builtin(exec_data->cmd, exec_data->envp);
+        exit(status);
+    }
+    executable_path = find_executable(exec_data->cmd->command, exec_data->envp);
+    if (!executable_path)
+        exit(handle_command_not_found(exec_data->cmd->command));
+    execve(executable_path, exec_data->cmd->full_cmd, exec_data->envp);
+    free(executable_path);
+    exit(handle_execve_error(exec_data->cmd->command));
 }
 
 /**

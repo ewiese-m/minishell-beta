@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:48:33 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 13:52:47 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:43:26 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ void	free_pipeline(t_pipeline *pipeline)
 	if (pipeline->commands)
 		free(pipeline->commands);
 	if (pipeline->pipes)
+	{
 		free_pipes(pipeline->pipes, pipeline->cmd_count - 1);
+		pipeline->pipes = NULL;
+	}
 	free(pipeline);
 }

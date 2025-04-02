@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:31 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 17:36:34 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/02 23:04:32 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ static int	handle_pipeline_success(t_pipeline *pipeline, pid_t *pids)
 	last_status = wait_for_commands(pipeline, pids);
 	free(pids);
 	if (pipeline->pipes)
+	{
 		free_pipes(pipeline->pipes, pipeline->cmd_count - 1);
+		pipeline->pipes = NULL;
+	}
 	return (last_status);
 }
 

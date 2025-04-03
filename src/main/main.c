@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 13:17:07 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/03 15:43:16 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static int	process_command(char *line, t_env *env_list, char **env_copy)
 		{
 			exit_status = builtin_exit(cmds);
 		}
-		else if (is_builtin(cmds->command))
+		else if (is_builtin(cmds->command) && cmds->next == NULL)
 		{
 			exit_status = execute_builtin(cmds, env_copy);
 			update_exit_status(env_list, exit_status);

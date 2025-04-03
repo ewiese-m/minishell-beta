@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:24:59 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/30 13:59:35 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/03 17:14:50 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int	ft_check_redirect(t_command *cmd, char **cmd_table)
 		redirect_type = ft_get_redirection(cmd_table[i]);
 		if (redirect_type)
 		{
-			redirect_len = 1;
-			if ((redirect_type & HEREDOC) || (redirect_type & APPEND))
-				redirect_len = 2;
+			redirect_len = (redirect_type & (HEREDOC | APPEND)) ? 2 : 1;
 			old_redirect = cmd->redirect;
 			cmd->redirect = redirect_type;
 			if (ft_add_redirection(cmd_table, cmd, i, redirect_len))

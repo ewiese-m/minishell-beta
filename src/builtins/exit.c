@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:59:55 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 14:09:40 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/04 18:52:46 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	builtin_exit(t_command *cmd)
 		return (1);
 	}
 	exit_code = ft_atoi(cmd->args[1]);
+	//rl_clear_history();
 	return (-(exit_code & 255));
 }
 // Cuando cmd->args[1] no es un argumento numérico válido,

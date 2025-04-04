@@ -41,7 +41,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/lexer_parser/handle_expansion.c \
        $(SRC_DIR)/lexer_parser/ft_resize_string_array.c \
        $(SRC_DIR)/environment_management/create_env_copy.c \
-       $(SRC_DIR)/environment_management/free_env_copy.c \
+       $(SRC_DIR)/environment_management/free_env_array.c \
        $(SRC_DIR)/environment_management/free_list.c \
        $(SRC_DIR)/environment_management/ft_create_env_node.c \
        $(SRC_DIR)/environment_management/ft_get_envp.c \
@@ -66,13 +66,13 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/execution/command_execution.c \
        $(SRC_DIR)/execution/env_conversion.c \
        $(SRC_DIR)/execution/exit_status.c \
-       $(SRC_DIR)/execution/pipeline_creation.c \
-       $(SRC_DIR)/execution/pipeline_execution.c \
-       $(SRC_DIR)/execution/pipeline_utils.c \
        $(SRC_DIR)/path_resolution/path_env.c \
        $(SRC_DIR)/path_resolution/path_resolution.c \
        $(SRC_DIR)/path_resolution/path_utils.c \
        $(SRC_DIR)/path_resolution/error_handling.c \
+       $(SRC_DIR)/pipelines_redirections/pipeline_creation.c \
+       $(SRC_DIR)/pipelines_redirections/pipeline_execution.c \
+       $(SRC_DIR)/pipelines_redirections/pipeline_utils.c \
        $(SRC_DIR)/pipelines_redirections/pipeline.c \
        $(SRC_DIR)/pipelines_redirections/pipelines_utils.c \
        $(SRC_DIR)/pipelines_redirections/redirections.c

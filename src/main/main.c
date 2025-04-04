@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/03 15:43:16 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/03 22:03:57 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,6 @@ int	main(int argc, char **argv, char **envp)
 	minishell_loop(env_list, env_copy);
 	final_status = get_exit_status(env_list);
 	cleanup_resources(env_list);
-	free_env_copy(env_copy);
+	free_env_array(env_copy);
 	return (final_status);
 }

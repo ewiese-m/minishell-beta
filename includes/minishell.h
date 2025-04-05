@@ -6,14 +6,12 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:43:39 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 18:31:48 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:34:07 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-extern int	g_exit_status;
 
 /* 1. First, Libft */
 # include "../libft/libft.h"
@@ -39,10 +37,10 @@ extern int	g_exit_status;
 # include "pipelines_redirections.h"
 
 /* Display functions - For testing */
-void		display_command_info(t_command *cmds);
-void		display_command_name(t_command *cmd);
-void		display_arguments(t_command *cmd);
-void		display_full_command(t_command *cmd);
-void		display_redirections(t_command *cmd);
+void	display_command_info(t_command *cmds);
+void	display_command_name(t_command *cmd);
+void	display_arguments(t_command *cmd);
+void	display_full_command(t_command *cmd);
+void	display_redirections(t_command *cmd);
 
 #endif

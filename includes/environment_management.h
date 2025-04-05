@@ -6,12 +6,12 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:24 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 21:40:03 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:34:27 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIROMENT_MANAGEMENT_H
-# define ENVIROMENT_MANAGEMENT_H
+#ifndef ENVIRONMENT_MANAGEMENT_H
+# define ENVIRONMENT_MANAGEMENT_H
 
 # include "minishell.h"
 /*

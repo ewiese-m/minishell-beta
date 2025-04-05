@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 19:35:43 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/03 17:14:27 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:09:07 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,18 @@
 
 int	was_quoted_content(char *token)
 {
+	int	i;
+
 	if (!token)
 		return (0);
-	for (int i = 0; token[i]; i++)
+	i = 0;
+	while (token[i])
+	{
 		if (token[i] == ' ' || token[i] == '<' || token[i] == '>'
 			|| token[i] == '*' || token[i] == '|' || token[i] == ';')
 			return (1);
+		i++;
+	}
 	return (0);
 }
 

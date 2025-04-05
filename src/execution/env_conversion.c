@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 13:11:36 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 12:13:07 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,19 @@ char	**ft_create_env_array(t_env *env_list)
 	int		count;
 	char	**env_array;
 	int		status;
+	int		extra_space;
+	int		i;
 
 	count = count_env_vars(env_list);
-	env_array = (char **)malloc(sizeof(char *) * (count + 1));
+	extra_space = 1000;
+	env_array = (char **)malloc(sizeof(char *) * (count + extra_space + 1));
 	if (!env_array)
 		return (NULL);
 	status = populate_env_array(env_array, env_list);
 	if (status == -1)
 		return (NULL);
+	i = count;
+	while (i < count + extra_space)
+		env_array[i++] = NULL;
 	return (env_array);
 }

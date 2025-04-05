@@ -12,9 +12,9 @@ LIBFT_DIR = libft
 # Source files
 SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/main/process_command.c \
-       $(SRC_DIR)/main/display_command.c \
-       $(SRC_DIR)/main/display_command_details.c \
-       $(SRC_DIR)/main/display_redirections.c \
+       $(SRC_DIR)/debug/display_command.c \
+       $(SRC_DIR)/debug/display_command_details.c \
+       $(SRC_DIR)/debug/display_redirections.c \
        $(SRC_DIR)/lexer_parser/count_command.c \
        $(SRC_DIR)/lexer_parser/extract_command.c \
        $(SRC_DIR)/lexer_parser/ft_add_io_file.c \

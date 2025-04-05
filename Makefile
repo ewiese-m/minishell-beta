@@ -11,6 +11,7 @@ LIBFT_DIR = libft
 
 # Source files
 SRCS = $(SRC_DIR)/main/main.c \
+       $(SRC_DIR)/main/process_command.c \
        $(SRC_DIR)/main/display_command.c \
        $(SRC_DIR)/main/display_command_details.c \
        $(SRC_DIR)/main/display_redirections.c \

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/03 22:03:57 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:18:13 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,37 +16,6 @@ static void	setup_signals(void)
 {
 	signal(SIGINT, ft_signal_ctrl_c);
 	signal(SIGQUIT, SIG_IGN);
-}
-
-static int	process_command(char *line, t_env *env_list, char **env_copy)
-{
-	t_command	*cmds;
-	int			exit_status;
-
-	exit_status = 0;
-	if (!line || *line == '\0')
-		return (0);
-	add_history(line);
-	cmds = ft_parse_input(line, env_list);
-	if (cmds)
-	{
-		if (ft_strcmp(cmds->command, "exit") == 0)
-		{
-			exit_status = builtin_exit(cmds);
-		}
-		else if (is_builtin(cmds->command) && cmds->next == NULL)
-		{
-			exit_status = execute_builtin(cmds, env_copy);
-			update_exit_status(env_list, exit_status);
-		}
-		else
-		{
-			exit_status = execute_commands(cmds, env_list);
-		}
-		ft_free_cmdlist(&cmds);
-	}
-	free(line);
-	return (exit_status);
 }
 
 static void	cleanup_resources(t_env *env_list)

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:21:08 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 11:28:18 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 18:05:52 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,6 @@ void		execute_pipeline_command(t_pipe_exec *exec_data);
 int			fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
 				char **envp);
 
+/*char	**prepare_execve_args(char *executable_path, char **full_cmd)*/
+char		**prepare_execve_args(char *executable_path, char **full_cmd);
 #endif

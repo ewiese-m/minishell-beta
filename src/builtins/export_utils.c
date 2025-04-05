@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:05:53 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/01 11:37:33 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 17:50:37 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	is_valid_export_name(char *arg)
 	eq_pos = ft_strchr(arg, '=');
 	if (!eq_pos)
 		return (is_valid_name_part(arg));
-	if (eq_pos == arg) /* Case: "=" */
+	if (eq_pos == arg)
 		return (0);
 	name = ft_substr(arg, 0, eq_pos - arg);
 	is_valid = is_valid_name_part(name);

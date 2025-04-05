@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:55:17 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/01 11:01:51 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 17:50:35 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,9 @@ int	builtin_echo(t_command *cmd)
 {
 	int	n_flag;
 	int	start_index;
-	//int	i;
 
 	n_flag = count_n_options(cmd->args);
 	start_index = 1 + n_flag;
-	//i = start_index;
-	//while (cmd->args[i])
-	//{
-	//	if (!validate_quotes(cmd->args[i]))
-	//	{
-	//		ft_putstr_fd("minishell: syntax error: unbalanced quotes\n", 2);
-	//		return (1);
-	//	}
-	//	i++;
-	//}
 	print_echo_args(cmd->args, start_index);
 	if (!n_flag)
 		ft_putchar_fd('\n', STDOUT_FILENO);

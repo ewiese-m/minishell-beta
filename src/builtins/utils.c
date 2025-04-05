@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:00:13 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/01 11:01:01 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 17:50:38 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,27 +31,7 @@ int	is_valid_exit_arg(char *arg)
 	}
 	return (1);
 }
-/*
-int	validate_quotes(char *str)
-{
-	int	single_quote;
-	int	double_quote;
-	int	i;
 
-	single_quote = 0;
-	double_quote = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == '\'' && !double_quote)
-			single_quote = !single_quote;
-		else if (str[i] == '"' && !single_quote)
-			double_quote = !double_quote;
-		i++;
-	}
-	return (!(single_quote || double_quote));
-}
-*/
 int	validate_quotes(char *str)
 {
 	int		i;
@@ -77,3 +57,23 @@ int	validate_quotes(char *str)
 	}
 	return (!in_quotes);
 }
+/*
+int	validate_quotes(char *str)
+{
+	int	single_quote;
+	int	double_quote;
+	int	i;
+
+	single_quote = 0;
+	double_quote = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' && !double_quote)
+			single_quote = !single_quote;
+		else if (str[i] == '"' && !single_quote)
+			double_quote = !double_quote;
+		i++;
+	}
+	return (!(single_quote || double_quote));
+}*/

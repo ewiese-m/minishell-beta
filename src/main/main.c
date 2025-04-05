@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 18:18:13 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/05 20:05:05 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ static void	cleanup_resources(t_env *env_list)
 		free(current);
 		current = next;
 	}
-	clear_history();
+	// clear_history();
+	rl_clear_history();
+	//rl_cleanup_after_signal();
 }
 
 static void	minishell_loop(t_env *env_list, char **env_copy)
@@ -49,6 +51,7 @@ static void	minishell_loop(t_env *env_list, char **env_copy)
 		{
 			break ;
 		}
+		add_history(line);
 		exit_status = process_command(line, env_list, env_copy);
 		if (exit_status < 0)
 		{
@@ -60,6 +63,7 @@ static void	minishell_loop(t_env *env_list, char **env_copy)
 			update_exit_status(env_list, exit_status);
 		}
 	}
+	rl_clear_history();
 }
 
 int	main(int argc, char **argv, char **envp)

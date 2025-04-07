@@ -4,5 +4,6 @@ example3.txt
 example4.txt
 example5.txt
 *.o
+*.a
 minishell
-/minishell_tester
+minishell_tester

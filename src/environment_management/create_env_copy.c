@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 21:36:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 17:55:32 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/06 02:42:01 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**create_env_copy(char **envp)
 	size = 0;
 	while (envp[size])
 		size++;
-	extra_space = 10000;
+	extra_space = 100000;
 	env_copy = malloc((size + extra_space + 1) * sizeof(char *));
 	if (!env_copy)
 		return (NULL);

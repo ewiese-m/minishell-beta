@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/30 15:31:00 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:34:38 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "minishell.h"
 
-/*
-** Lexer and Parser functions
-*/
 char		*ft_expand_variable(char *input, t_env *env_list);
 char		*ft_extract_env_var(char *in_put, int *index, t_env *env_list);
 char		*handle_expansion(char *result, char *input, int *i,

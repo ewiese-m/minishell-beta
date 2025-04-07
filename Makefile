@@ -54,16 +54,15 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/builtins/env.c \
        $(SRC_DIR)/builtins/exit.c \
        $(SRC_DIR)/builtins/export.c \
-       $(SRC_DIR)/builtins/export_utils.c \
+       $(SRC_DIR)/builtins/export_utils/export_utils.c \
        $(SRC_DIR)/builtins/pwd.c \
        $(SRC_DIR)/builtins/unset.c \
        $(SRC_DIR)/builtins/utils.c \
-       $(SRC_DIR)/enviroment/add_to_env.c \
-       $(SRC_DIR)/enviroment/get_env_size.c \
-       $(SRC_DIR)/enviroment/get_env_value.c \
-       $(SRC_DIR)/enviroment/is_valid_env_name.c \
-       $(SRC_DIR)/enviroment/remove_from_env.c \
-       $(SRC_DIR)/enviroment/update_env.c \
+       $(SRC_DIR)/builtins/env_utils/get_env_size.c \
+       $(SRC_DIR)/builtins/env_utils/get_env_value.c \
+       $(SRC_DIR)/builtins/env_utils/is_valid_env_name.c \
+       $(SRC_DIR)/builtins/env_utils/remove_from_env.c \
+       $(SRC_DIR)/builtins/env_utils/update_env.c \
        $(SRC_DIR)/execution/cmd_execution.c \
        $(SRC_DIR)/execution/command_execution.c \
        $(SRC_DIR)/execution/env_conversion.c \

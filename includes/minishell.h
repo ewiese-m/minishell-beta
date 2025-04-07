@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:43:39 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 18:34:07 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:20:21 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # include "environment_management.h"
 /* 6. Signal Handling */
 # include "signal_handling.h"
-/* Minishell enviroment */
-# include "enviroments.h"
 /* 7. Built-ins */
 # include "builtins.h"
 /* 8. Execution */

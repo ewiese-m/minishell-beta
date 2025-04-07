@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   enviroments.h                                      :+:      :+:    :+:   */
+/*   get_env_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 01:00:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:34:09 by ewiese-m         ###   ########.fr       */
+/*   Created: 2025/03/26 16:53:35 by ewiese-m          #+#    #+#             */
+/*   Updated: 2025/04/07 20:27:42 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENVIROMENTS_H
-# define ENVIROMENTS_H
+#include "../includes/minishell.h"
 
-# include "minishell.h"
+char	*get_env_value(char *name, char **envp)
+{
+	int	i;
+	int	len;
 
-int		is_valid_env_name(char *name);
-char	*get_env_value(char *name, char **envp);
-void	update_env(char *name, char *value, char **envp);
-int		get_env_size(char **envp);
-void	add_to_env(char *var, char **envp);
-void	remove_from_env(char *name, char **envp);
-
-#endif
+	if (!name || !envp)
+		return (NULL);
+	len = ft_strlen(name);
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], name, len) == 0 && envp[i][len] == '=')
+			return (envp[i] + len + 1);
+		i++;
+	}
+	return (NULL);
+}

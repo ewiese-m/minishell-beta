@@ -6,11 +6,11 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:56:13 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/26 17:01:34 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:12:26 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static char	*extract_name(char *var)
 {

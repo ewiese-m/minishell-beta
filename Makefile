@@ -72,12 +72,12 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/path_resolution/path_resolution.c \
        $(SRC_DIR)/path_resolution/path_utils.c \
        $(SRC_DIR)/path_resolution/error_handling.c \
-       $(SRC_DIR)/pipelines_redirections/pipeline_creation.c \
-       $(SRC_DIR)/pipelines_redirections/pipeline_execution.c \
-       $(SRC_DIR)/pipelines_redirections/pipeline_utils.c \
-       $(SRC_DIR)/pipelines_redirections/pipeline.c \
-       $(SRC_DIR)/pipelines_redirections/pipelines_utils.c \
-       $(SRC_DIR)/pipelines_redirections/redirections.c
+       $(SRC_DIR)/pipelines/pipeline_creation.c \
+       $(SRC_DIR)/pipelines/pipeline_execution.c \
+       $(SRC_DIR)/pipelines/pipeline_utils.c \
+       $(SRC_DIR)/pipelines/pipeline.c \
+       $(SRC_DIR)/pipelines/pipelines_utils.c \
+       $(SRC_DIR)/redirections/redirections.c
 
 
 # Object files

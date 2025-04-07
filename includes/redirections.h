@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipelines_redirections.h                           :+:      :+:    :+:   */
+/*   pipelines.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,22 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPELINES_REDIRECTIONS_H
-# define PIPELINES_REDIRECTIONS_H
+#ifndef REDIRECTIONS_H
+# define REDIRECTIONS_H
 
 # include "minishell.h"
 
-t_pipeline	*create_pipeline(t_command *cmd_list);
-void		free_pipeline(t_pipeline *pipeline);
-void		free_pipes(int **pipes, int pipe_count);
-int			apply_redirections(t_command *cmd);
-int			**create_pipes(int cmd_count);
-int			init_pipeline_execution(t_pipeline *pipeline, pid_t **pids);
-int			execute_pipeline(t_pipeline *pipeline, char **envp);
-int			can_execute_directly(t_pipeline *pipeline);
-void		close_all_pipes(t_pipeline *pipeline);
-int			wait_for_commands(t_pipeline *pipeline, pid_t *pids);
-int			fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
-				char **envp);
+int	apply_redirections(t_command *cmd);
 
 #endif

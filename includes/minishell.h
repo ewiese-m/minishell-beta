@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:43:39 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 20:20:21 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/07 20:35:22 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@
 /* 9. Path Resolution */
 # include "path_resolution.h"
 /* 10. Pipelines and Redirections */
-# include "pipelines_redirections.h"
+# include "pipelines.h"
+/* 11. Pipelines and Redirections */
+# include "redirections.h"
 
 /* Display functions - For testing */
 void	display_command_info(t_command *cmds);

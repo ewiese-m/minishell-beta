@@ -6,4 +6,4 @@ example5.txt
 *.o
 *.a
 minishell
-minishell_tester
+*.json

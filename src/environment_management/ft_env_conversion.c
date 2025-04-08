@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_conversion.c                                   :+:      :+:    :+:   */
+/*   ft_env_conversion.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 12:13:07 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:16:58 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	populate_env_array(char **env_array, t_env *env_list)
 	return (0);
 }
 
-int	count_env_vars(t_env *env_list)
+static int	count_env_vars(t_env *env_list)
 {
 	int		count;
 	t_env	*current;

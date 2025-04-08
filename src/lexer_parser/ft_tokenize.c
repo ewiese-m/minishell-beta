@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 19:33:11 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 13:39:46 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/07 21:04:39 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static void	skip_whitespace(char *input, int *i)
 
 char	*ft_tokenize(char *str, char *input, int *index, t_env *env_list)
 {
-	int	i;
-			char tmp[2];
+	int		i;
+	char	tmp[2];
 
 	i = *index;
 	if (input[i] == '>' || input[i] == '<')
@@ -79,7 +79,6 @@ char	*ft_tokenize(char *str, char *input, int *index, t_env *env_list)
 		}
 		return (str);
 	}
-	// Resto del código original
 	while (input[i] && input[i] != ' ' && input[i] != '<' && input[i] != '>')
 	{
 		if (input[i] == '"' || input[i] == '\'')

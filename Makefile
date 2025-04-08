@@ -46,6 +46,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/environment_management/free_env_array.c \
        $(SRC_DIR)/environment_management/free_list.c \
        $(SRC_DIR)/environment_management/ft_create_env_node.c \
+       $(SRC_DIR)/environment_management/ft_env_conversion.c \
        $(SRC_DIR)/environment_management/ft_get_envp.c \
        $(SRC_DIR)/signal_handling/signal.c \
        $(SRC_DIR)/builtins/builtins_main.c \
@@ -63,22 +64,21 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/builtins/env_utils/is_valid_env_name.c \
        $(SRC_DIR)/builtins/env_utils/remove_from_env.c \
        $(SRC_DIR)/builtins/env_utils/update_env.c \
-       $(SRC_DIR)/execution/cmd_execution.c \
        $(SRC_DIR)/execution/command_execution.c \
-       $(SRC_DIR)/execution/env_conversion.c \
-       $(SRC_DIR)/execution/execute_pipeline_command.c \
-       $(SRC_DIR)/execution/exit_status.c \
+       $(SRC_DIR)/execution/execution_exit_status.c \
+       $(SRC_DIR)/execution/execution_main.c \
        $(SRC_DIR)/path_resolution/path_env.c \
        $(SRC_DIR)/path_resolution/path_resolution.c \
        $(SRC_DIR)/path_resolution/path_utils.c \
        $(SRC_DIR)/path_resolution/error_handling.c \
+       $(SRC_DIR)/pipelines/execute_pipeline_command.c \
+       $(SRC_DIR)/pipelines/pipeline.c \
        $(SRC_DIR)/pipelines/pipeline_creation.c \
        $(SRC_DIR)/pipelines/pipeline_execution.c \
-       $(SRC_DIR)/pipelines/pipeline_utils.c \
-       $(SRC_DIR)/pipelines/pipeline.c \
+       $(SRC_DIR)/pipelines/pipeline_redirections.c \
        $(SRC_DIR)/pipelines/pipelines_utils.c \
+       $(SRC_DIR)/pipelines/pipeline_utils.c \
        $(SRC_DIR)/redirections/redirections.c
-
 
 # Object files
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

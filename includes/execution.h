@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:21:08 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:36:34 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:45:06 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	add_exit_status_var(t_env *env_list);
 void	update_exit_status(t_env *env_list, int status);
 int		get_exit_status(t_env *env_list);
 char	**ft_create_env_array(t_env *env_list);
-int		count_env_vars(t_env *env_list);
 void	close_other_pipes(int **pipes, int cmd_index, int cmd_count);
 int		setup_redirections(t_command *cmd, int **pipes, int cmd_index,
 			int cmd_count);

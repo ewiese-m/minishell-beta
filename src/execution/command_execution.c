@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:56 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/08 12:05:36 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/12 14:59:19 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	setup_redirections(t_command *cmd, int **pipes, int cmd_index,
 		if (dup2(pipes[cmd_index - 1][0], STDIN_FILENO) == -1)
 			return (1);
 	}
-	if (cmd_index < cmd_count - 1 && cmd->output == 0)
+	if (cmd_index < cmd_count - 1 && cmd->output == 1)
 	{
 		if (dup2(pipes[cmd_index][1], STDOUT_FILENO) == -1)
 			return (1);

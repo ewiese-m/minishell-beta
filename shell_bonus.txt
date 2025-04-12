@@ -1,0 +1,73 @@
+Shell Command Processing
+│
+├── 1. PARSE COMMAND LINE
+│   ├── Tokenize input
+│   ├── Handle quotes
+│   ├── Build command structures
+│   └── Identify operators (|, <, >, etc.)
+│
+├── 2. EXPANSIONS & SUBSTITUTIONS
+│   ├── Variable expansion ($VAR)
+│   ├── Command substitution $(cmd)
+│   ├── Tilde expansion (~)
+│   └── Wildcard expansion (*)
+│
+├── 3. LOGICAL OPERATORS (if present)
+│   ├── Handle && (AND)
+│   ├── Handle || (OR)
+│   └── Handle ; (command separator)
+│
+└── 4. EXECUTION PHASE
+    │
+    ├── 4.1 PREPARE PIPELINE
+    │   └── Create all necessary pipes
+    │
+    ├── 4.2 FORK PROCESSES
+    │   └── Create child process for each command
+    │
+    ├── 4.3 IN EACH CHILD PROCESS:
+    │   │
+    │   ├── a. SET UP REDIRECTIONS
+    │   │   ├── Handle input redirections (<, <<)
+    │   │   ├── Handle output redirections (>, >>)
+    │   │   └── Connect process to pipes
+    │   │
+    │   └── b. EXECUTE COMMAND
+    │       ├── Check if builtin
+    │       │   └── If yes, execute builtin directly
+    │       │
+    │       └── If external command
+    │           ├── Resolve command path
+    │           └── execve() to replace process
+    │
+    └── 4.4 IN PARENT PROCESS:
+        ├── Close unused pipe ends
+        ├── Wait for child processes
+        └── Collect exit status
+
+
+Examples
+Simple Command: ls -l
+
+Parse into command "ls" with arg "-l"
+No expansions needed
+No logical operators
+Execute directly (fork + execve)
+
+Command with Redirection: grep pattern < file.txt
+
+Parse into command "grep" with arg "pattern" and redirect input from "file.txt"
+No expansions needed
+No logical operators
+Fork, set up redirection (open file.txt and duplicate to stdin), then execute grep
+
+Pipeline: cat file.txt | grep pattern | wc -l
+
+Parse into three commands with pipe operators
+No expansions needed
+No logical operators
+Create two pipes
+Fork three processes
+Set up pipe connections (cat stdout → pipe1, grep stdin ← pipe1, grep stdout → pipe2, wc stdin ← pipe2)
+Execute each command in its respective process
+Parent waits for all to complete

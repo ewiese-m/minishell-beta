@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 19:33:11 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 21:04:39 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/10 14:08:56 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 static char	*handle_quotes(char *str, char *input, int *i, t_env *env_list)
 {
-	return (ft_process_quotes(str, input, i, env_list));
+	char	*result;
+	char	quote_type;
+
+	quote_type = input[*i];
+	result = ft_process_quotes(str, input, i, env_list);
+	if (input[*i] == quote_type)
+		(*i)++;
+	return (result);
 }
 
 static char	*handle_dollar_sign(char *str, char *input, int *i, t_env *env_list)

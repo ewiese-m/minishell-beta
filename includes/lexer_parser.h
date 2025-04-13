@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:34:38 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/12 11:23:29 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char		**ft_resize_string_array(char **array, int current_size,
 				int target_size);
 int			ft_get_redirection(char *token);
 void		ft_arrange_table(char **table, int index, int len);
-char		*ft_add_io_file(char *old_file, char *new_file,
+char		**ft_add_io_file(char **old_files, char *new_file,
 				int len_redirection);
 char		**ft_many_redirect(char **old_files, char *new_file, int len);
 int			ft_add_redirection(char **table, t_command *cmd, int index,

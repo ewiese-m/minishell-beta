@@ -3,5 +3,12 @@
         "minishell.h": "c",
         "environment_management.h": "c",
         "signal_handling.h": "c"
-    }
+    },
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/ewiese-m/Documents/42Luxembourg/common_core/minishell",
+            "binaryPath": "/home/ewiese-m/Documents/42Luxembourg/common_core/minishell/minishell",
+            "binaryArgs": []
+        }
+    ]
 }

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:16:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:18:02 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 00:47:42 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int	process_command(char *line, t_env *env_list, char **env_copy)
 	cmds = ft_parse_input(line, env_list);
 	if (cmds)
 	{
-		// display_command_info(cmds);
+		if (cmds->redirect_error)
+			return (1);
 		exit_status = process_valid_command(cmds, env_list, env_copy);
 		ft_free_cmdlist(&cmds);
 	}

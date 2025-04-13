@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:22:23 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/13 22:57:21 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 00:42:42 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	ft_add_redirection(char **table, t_command *cmd, int index, int len)
 {
 	int	count;
+	int	fd;
 
 	count = 0;
 	while (table[index][count] && (table[index][count] == '<'
@@ -35,7 +36,21 @@ int	ft_add_redirection(char **table, t_command *cmd, int index, int len)
 	}
 	if (cmd->redirect & IN_REDIR)
 	{
-		cmd->from_file = cmd->from_file = ft_strdup(table[index] + len);
+		if (cmd->from_file)
+			free(cmd->from_file);
+		cmd->from_file = ft_strdup(table[index] + len);
+		fd = open(cmd->from_file, O_RDONLY);
+		if (fd == -1)
+		{
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(cmd->from_file, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
+			cmd->redirect_error = 1;
+			return (0);
+		}
+		close(fd);
 	}
 	else if (cmd->redirect & HEREDOC)
 	{

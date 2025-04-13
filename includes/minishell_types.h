@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:06:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 13:26:51 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 00:24:44 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_command
 	int					redirect;
 	int					input;
 	int					output;
+	int					redirect_error;
 	struct s_command	*next;
 }						t_command;
 

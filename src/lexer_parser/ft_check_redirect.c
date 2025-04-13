@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:24:59 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/08 12:33:58 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 00:51:29 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_check_redirect(t_command *cmd, char **cmd_table)
 	int	process_result;
 
 	i = 0;
-	while (cmd_table[i])
+	while (cmd_table[i] && !cmd->redirect_error)
 	{
 		redirect_type = ft_get_redirection(cmd_table[i]);
 		if (redirect_type)

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:21:11 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/30 15:13:43 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/12 14:44:16 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,19 @@ static t_command	*init_cmd_struct(void)
 	t_command	*cmd;
 
 	cmd = (t_command *)ft_calloc(1, sizeof(t_command));
+	if (cmd)
+	{
+		cmd->command = NULL;
+		cmd->args = NULL;
+		cmd->full_cmd = NULL;
+		cmd->from_file = NULL;
+		cmd->hdocs_end = NULL;
+		cmd->to_file = NULL;
+		cmd->redirect = 0;
+		cmd->input = 0;
+		cmd->output = 1;
+		cmd->next = NULL;
+	}
 	return (cmd);
 }
 

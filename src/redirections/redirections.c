@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:48:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/12 13:34:20 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:32:25 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static int	open_output_file(t_command *cmd, int *fd)
 {
 	int	flags;
 
+	printf("DEBUG [open_output_file]: Abriendo archivo para salida: '%s'\n",
+		cmd->to_file ? cmd->to_file[0] : "NULL");
 	if (!cmd->to_file || !cmd->to_file[0])
 		return (0);
 	if (cmd->redirect & APPEND)
@@ -32,6 +34,9 @@ static int	open_output_file(t_command *cmd, int *fd)
 		ft_putstr_fd("\n", 2);
 		return (1);
 	}
+	printf("DEBUG [open_output_file]: Flags: %s\n",
+		(cmd->redirect & APPEND) ? "O_APPEND" : "O_TRUNC");
+	printf("DEBUG [open_output_file]: fd obtenido: %d\n", *fd);
 	return (0);
 }
 
@@ -40,6 +45,8 @@ static int	handle_output_redirection(t_command *cmd)
 	int	fd;
 	int	status;
 
+	printf("DEBUG [handle_output_redirection]: Manejando redirección de salida\n");
+	printf("DEBUG [handle_output_redirection]: Resultado: %d\n", status);
 	status = open_output_file(cmd, &fd);
 	if (status != 0)
 		return (status);
@@ -57,6 +64,9 @@ static int	handle_output_redirection(t_command *cmd)
 static int	handle_input_redirection(t_command *cmd)
 {
 	int	fd;
+
+	printf("DEBUG [handle_input_redirection]: Valor real de from_file: '%s'\n",
+		cmd->from_file ? cmd->from_file : "NULL");
 
 	if (!cmd->from_file || !cmd->from_file[0])
 		return (0);
@@ -76,6 +86,10 @@ static int	handle_input_redirection(t_command *cmd)
 		return (1);
 	}
 	close(fd);
+	printf("DEBUG [handle_input_redirection]: Manejando redirección de entrada: '%s'\n",
+		cmd->from_file ? cmd->from_file : "NULL");
+	printf("DEBUG [handle_input_redirection]: fd obtenido: %d\n", fd);
+
 	return (0);
 }
 /*
@@ -128,6 +142,9 @@ static int	apply_heredoc(t_command *cmd)
 		}
 		close(fd);
 	}
+	printf("DEBUG [apply_heredoc]: Aplicando heredoc\n");
+	printf("DEBUG [apply_heredoc]: from_file: '%s'\n",
+    (cmd->redirect & HEREDOC && cmd->from_file) ? cmd->from_file : "NULL");
 	return (0);
 }
 
@@ -150,6 +167,10 @@ int	apply_redirections(t_command *cmd)
 		if (handle_output_redirection(cmd) != 0)
 			return (1);
 	}
+	printf("DEBUG [apply_redirections]: Aplicando redirecciones para cmd: '%s'\n",
+		cmd ? (cmd->command ? cmd->command : "NULL") : "NULL");
+	printf("DEBUG [apply_redirections]: Flags de redirección: %d\n",
+		cmd ? cmd->redirect : 0);
 	return (0);
 }
 /*

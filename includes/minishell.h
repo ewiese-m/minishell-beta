@@ -6,12 +6,21 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:43:39 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 20:35:22 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:26:18 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+
+#define DEBUG_MODE 1  // Cambia a 0 para desactivar
+
+#if DEBUG_MODE
+#define DEBUG_PRINT(fmt, ...) printf("DEBUG: " fmt, ##__VA_ARGS__)
+#else
+#define DEBUG_PRINT(fmt, ...) do {} while (0)
+#endif
 
 /* 1. First, Libft */
 # include "../libft/libft.h"

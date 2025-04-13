@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.c                                      :+:      :+:    :+:   */
+/*   execution_exit_status.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:08:19 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/08 12:05:52 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/13 20:58:57 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	add_exit_status_var(t_env *env_list)
 	t_env	*current;
 	t_env	*exit_var;
 
+	printf("DEBUG [add_exit_status_var]: Añadiendo variable de estado de salida\n");
 	current = env_list;
 	exit_var = NULL;
 	while (current)
@@ -48,6 +49,7 @@ void	update_exit_status(t_env *env_list, int status)
 {
 	t_env	*current;
 
+	printf("DEBUG [update_exit_status]: Actualizando status a: %d\n", status);
 	if (!env_list)
 		return ;
 	current = env_list;
@@ -71,6 +73,7 @@ int	get_exit_status(t_env *env_list)
 {
 	t_env	*current;
 
+	printf("DEBUG [get_exit_status]: Obteniendo estado de salida\n");
 	current = env_list;
 	while (current)
 	{

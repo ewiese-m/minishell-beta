@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:48:33 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 17:43:26 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/13 21:10:01 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	count_commands(t_command *cmd)
 	int			count;
 	t_command	*current;
 
+	printf("DEBUG [count_commands]: Contando comandos en pipeline\n");
 	count = 0;
 	current = cmd;
 	while (current)
@@ -25,12 +26,14 @@ static int	count_commands(t_command *cmd)
 		current = current->next;
 	}
 	return (count);
+	printf("DEBUG [count_commands]: Total de comandos: %d\n", count);
 }
 
 static t_pipeline	*init_pipeline(t_command *cmd_list)
 {
 	t_pipeline	*pipeline;
 
+	printf("DEBUG [init_pipeline]: Inicializando pipeline\n");
 	if (!cmd_list)
 		return (NULL);
 	pipeline = (t_pipeline *)malloc(sizeof(t_pipeline));
@@ -65,6 +68,8 @@ t_pipeline	*create_pipeline(t_command *cmd_list)
 		current = current->next;
 	}
 	return (pipeline);
+	printf("DEBUG [create_pipeline]: Creando pipeline con %d comandos\n",
+		pipeline ? pipeline->cmd_count : 0);
 }
 
 void	free_pipeline(t_pipeline *pipeline)
@@ -79,4 +84,5 @@ void	free_pipeline(t_pipeline *pipeline)
 		pipeline->pipes = NULL;
 	}
 	free(pipeline);
+	printf("DEBUG [free_pipeline]: Liberando pipeline\n");
 }

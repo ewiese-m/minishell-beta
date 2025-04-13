@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:56 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 18:02:59 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/13 21:08:21 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	handle_redirection_error(t_pipe_exec *exec_data)
 {
 	t_pipeline	temp_pipeline;
 
+	printf("DEBUG [handle_redirection_error]: Error en redirección\n");
 	temp_pipeline.pipes = exec_data->pipes;
 	temp_pipeline.cmd_count = exec_data->cmd_count;
 	close_all_pipes(&temp_pipeline);
@@ -32,6 +33,8 @@ static void	close_unused_pipes(t_pipe_exec *exec_data)
 {
 	int	i;
 
+	printf("DEBUG [close_unused_pipes]: Cerrando pipes no usados para cmd_index: %d\n",
+		exec_data->cmd_index);
 	i = 0;
 	while (i < exec_data->cmd_count - 1)
 	{
@@ -50,9 +53,12 @@ static void	close_unused_pipes(t_pipe_exec *exec_data)
 static void	execute_builtin_command(t_pipe_exec *exec_data)
 {
 	int	status;
+	printf("DEBUG [execute_builtin_command]: Ejecutando builtin: '%s'\n",
+		exec_data->cmd->command);
 
 	status = execute_builtin(exec_data->cmd, exec_data->envp);
 	exit(status);
+	printf("DEBUG [execute_builtin_command]: Status de ejecución: %d\n", status);
 }
 
 /**
@@ -63,6 +69,8 @@ static void	execute_external_command(t_pipe_exec *exec_data)
 	char	*executable_path;
 	char	**execve_args;
 
+	printf("DEBUG [execute_external_command]: Ejecutando comando externo: '%s'\n",
+		exec_data->cmd->command);
 	executable_path = find_executable(exec_data->cmd->command, exec_data->envp);
 	if (!executable_path)
 		exit(handle_command_not_found(exec_data->cmd->command));
@@ -77,6 +85,8 @@ static void	execute_external_command(t_pipe_exec *exec_data)
 	free(executable_path);
 	free(execve_args);
 	exit(handle_execve_error(exec_data->cmd->command));
+	printf("DEBUG [execute_external_command]: Path resoluto: '%s'\n",
+		executable_path ? executable_path : "NULL");
 }
 
 /**
@@ -85,6 +95,8 @@ static void	execute_external_command(t_pipe_exec *exec_data)
  */
 void	execute_pipeline_command(t_pipe_exec *exec_data)
 {
+	printf("DEBUG [execute_pipeline_command]: Iniciando ejecución de comando: '%s'\n",
+		exec_data->cmd->command ? exec_data->cmd->command : "NULL");
 	if (setup_redirections(exec_data->cmd, exec_data->pipes,
 			exec_data->cmd_index, exec_data->cmd_count) != 0)
 		handle_redirection_error(exec_data);
@@ -93,4 +105,7 @@ void	execute_pipeline_command(t_pipe_exec *exec_data)
 		execute_builtin_command(exec_data);
 	else
 		execute_external_command(exec_data);
+		printf("DEBUG [execute_pipeline_command]: setup_redirections resultado: %d\n",
+			setup_redirections(exec_data->cmd, exec_data->pipes,
+				exec_data->cmd_index, exec_data->cmd_count));
 }

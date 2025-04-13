@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:21:11 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/12 14:44:16 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/13 22:33:36 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ t_command	*ft_parser(char **cmd_table)
 		return (NULL);
 	}
 	cmd = init_cmd_struct();
+	printf("DEBUG [ft_parser]: Comando creado, from_file: '%s'\n",
+		cmd->from_file ? cmd->from_file : "NULL");
 	if (!cmd)
 	{
 		return (NULL);

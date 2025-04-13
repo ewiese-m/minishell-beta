@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:16:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:18:02 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/13 20:56:12 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	process_valid_command(t_command *cmds, t_env *env_list,
 		char **env_copy)
 {
 	int	exit_status;
-
+	printf("DEBUG [process_command]: Llamando a process_valid_command\n");
 	if (ft_strcmp(cmds->command, "exit") == 0)
 	{
 		exit_status = handle_exit_command(cmds);
@@ -55,11 +55,13 @@ static int	process_valid_command(t_command *cmds, t_env *env_list,
 	{
 		exit_status = handle_external_command(cmds, env_list);
 	}
+	printf("DEBUG [process_command]: process_valid_command retornó: %d\n", exit_status);
 	return (exit_status);
 }
 
 int	process_command(char *line, t_env *env_list, char **env_copy)
 {
+	printf("DEBUG [process_command]: Procesando comando: '%s'\n", line);
 	t_command	*cmds;
 	int			exit_status;
 
@@ -67,13 +69,16 @@ int	process_command(char *line, t_env *env_list, char **env_copy)
 	if (!line || *line == '\0')
 		return (0);
 	add_history(line);
+	printf("DEBUG [process_command]: Llamando a parse_input\n");
 	cmds = ft_parse_input(line, env_list);
 	if (cmds)
 	{
-		// display_command_info(cmds);
+		printf("DEBUG [process_command]: parse_input exitoso\n");
 		exit_status = process_valid_command(cmds, env_list, env_copy);
 		ft_free_cmdlist(&cmds);
 	}
+	else
+		printf("DEBUG [process_command]: parse_input falló\n");
 	free(line);
 	return (exit_status);
 }

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:16:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/14 00:47:42 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:21:29 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,15 @@ static int	process_valid_command(t_command *cmds, t_env *env_list,
 	}
 	return (exit_status);
 }
-
+/*
+TODO hacer el control entre pipes/redirecciones.
+*/
 int	process_command(char *line, t_env *env_list, char **env_copy)
 {
 	t_command	*cmds;
 	int			exit_status;
+	t_command	*current;
 
-	// exit_status = 0;
 	if (!line || *line == '\0')
 		return (0);
 	add_history(line);
@@ -71,7 +73,18 @@ int	process_command(char *line, t_env *env_list, char **env_copy)
 	if (cmds)
 	{
 		if (cmds->redirect_error)
-			return (1);
+		{
+			current = cmds;
+			while (current)
+			{
+				if (current->redirect_error && (current->redirect & IN_REDIR)
+					&& current->from_file)
+					redirections_error_1(current->from_file);
+				current = current->next;
+			}
+			if (!cmds->next)
+				return (1);
+		}
 		exit_status = process_valid_command(cmds, env_list, env_copy);
 		ft_free_cmdlist(&cmds);
 	}

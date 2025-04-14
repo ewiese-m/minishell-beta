@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:48:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/12 13:34:20 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 10:23:37 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,7 @@ static int	open_output_file(t_command *cmd, int *fd)
 	*fd = open(cmd->to_file[0], flags, 0644);
 	if (*fd == -1)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->to_file[0], 2);
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
+		//redirections_error_1(cmd->to_file[0]);
 		return (1);
 	}
 	return (0);
@@ -63,8 +59,36 @@ static int	handle_input_redirection(t_command *cmd)
 	fd = open(cmd->from_file, O_RDONLY);
 	if (fd == -1)
 	{
+		//redirections_error_1(cmd->from_file);
+		return (1);
+	}
+	if (dup2(fd, STDIN_FILENO) == -1)
+	{
+		close(fd);
+		return (1);
+	}
+	close(fd);
+	return (0);
+}
+/*
+// In src/redirections/redirections.c,
+	modify the handle_input_redirection function:
+static int	handle_input_redirection(t_command *cmd)
+{
+	int	fd;
+	int	i;
+
+	if (!cmd->from_file || !cmd->from_file[0])
+		return (0);
+	// Use the last specified input file (POSIX behavior)
+	i = 0;
+	while (cmd->from_file[i+1])
+		i++;
+	fd = open(cmd->from_file[i], O_RDONLY);
+	if (fd == -1)
+	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(cmd->from_file, 2);
+		ft_putstr_fd(cmd->from_file[i], 2);
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
@@ -77,39 +101,6 @@ static int	handle_input_redirection(t_command *cmd)
 	}
 	close(fd);
 	return (0);
-}
-/*
-// In src/redirections/redirections.c, modify the handle_input_redirection function:
-static int handle_input_redirection(t_command *cmd)
-{
-    int fd;
-    int i;
-
-    if (!cmd->from_file || !cmd->from_file[0])
-        return (0);
-
-    // Use the last specified input file (POSIX behavior)
-    i = 0;
-    while (cmd->from_file[i+1])
-        i++;
-
-    fd = open(cmd->from_file[i], O_RDONLY);
-    if (fd == -1)
-    {
-        ft_putstr_fd("minishell: ", 2);
-        ft_putstr_fd(cmd->from_file[i], 2);
-        ft_putstr_fd(": ", 2);
-        ft_putstr_fd(strerror(errno), 2);
-        ft_putstr_fd("\n", 2);
-        return (1);
-    }
-    if (dup2(fd, STDIN_FILENO) == -1)
-    {
-        close(fd);
-        return (1);
-    }
-    close(fd);
-    return (0);
 }
  */
 static int	apply_heredoc(t_command *cmd)

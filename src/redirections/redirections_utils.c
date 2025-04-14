@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipelines.h                           :+:      :+:    :+:   */
+/*   redirections_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 13:18:47 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:37:10 by ewiese-m         ###   ########.fr       */
+/*   Created: 2025/04/14 10:03:29 by ewiese-m          #+#    #+#             */
+/*   Updated: 2025/04/14 10:15:50 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef REDIRECTIONS_H
-# define REDIRECTIONS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-int		apply_redirections(t_command *cmd);
-
-/* error messages */
-void	redirections_error_1(char *file);
-
-#endif
+void	redirections_error_1(char *file)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\n", 2);
+};

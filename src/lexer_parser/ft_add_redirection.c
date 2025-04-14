@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:22:23 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/14 01:35:33 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:21:22 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int ft_add_redirection(char **table, t_command *cmd, int index, int len)
 {
-    int count;
+	int	count;
+	int	fd;
 
     printf("DEBUG [ft_add_redirection]: Entrada - table[%d]: '%s', len: %d\n",
            index, table[index] ? table[index] : "NULL", len);
@@ -58,21 +59,28 @@ int ft_add_redirection(char **table, t_command *cmd, int index, int len)
 			cmd->redirect_error = 1;
 			return (0);  // Terminar parseo sin mostrar error de sintaxis
 		}
+	}
+	if (cmd->redirect & IN_REDIR)
+	{
+		if (cmd->from_file)
+			free(cmd->from_file);
+		cmd->from_file = ft_strdup(table[index] + len);
+		fd = open(cmd->from_file, O_RDONLY);
+		if (fd == -1)
+		{
+			cmd->redirect_error = 1;
+			return (0);
+		}
 		close(fd);
-        printf("DEBUG [ft_add_redirection]: from_file después de strdup: '%s'\n",
-               cmd->from_file ? cmd->from_file : "NULL");
-    }
-    else if (cmd->redirect & HEREDOC)
-    {
-        printf("DEBUG [ft_add_redirection]: Añadiendo heredoc\n");
-        cmd->hdocs_end = ft_many_redirect(cmd->hdocs_end, table[index], len);
-    }
-    else
-    {
-        printf("DEBUG [ft_add_redirection]: Añadiendo archivo de salida\n");
-        cmd->to_file = ft_many_redirect(cmd->to_file, table[index], len);
-    }
-
-    return (0);
+	}
+	else if (cmd->redirect & HEREDOC)
+	{
+		cmd->hdocs_end = ft_many_redirect(cmd->hdocs_end, table[index], len);
+	}
+	else
+	{
+		cmd->to_file = ft_many_redirect(cmd->to_file, table[index], len);
+	}
+	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:16:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/14 01:37:30 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 11:21:22 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,16 @@ static int	process_valid_command(t_command *cmds, t_env *env_list,
 	printf("DEBUG [process_command]: process_valid_command retornó: %d\n", exit_status);
 	return (exit_status);
 }
-
+/*
+TODO hacer el control entre pipes/redirecciones.
+*/
 int	process_command(char *line, t_env *env_list, char **env_copy)
 {
 	printf("DEBUG [process_command]: Procesando comando: '%s'\n", line);
 	t_command	*cmds;
 	int			exit_status;
+	t_command	*current;
 
-	// exit_status = 0;
 	if (!line || *line == '\0')
 		return (0);
 	add_history(line);
@@ -75,10 +77,17 @@ int	process_command(char *line, t_env *env_list, char **env_copy)
 	{
 		if (cmds->redirect_error)
 		{
-			printf("DEBUG [process_command]: No ejecutar el comando, solo retornar código de error 1\n");
-			return (1);
+			current = cmds;
+			while (current)
+			{
+				if (current->redirect_error && (current->redirect & IN_REDIR)
+					&& current->from_file)
+					redirections_error_1(current->from_file);
+				current = current->next;
+			}
+			if (!cmds->next)
+				return (1);
 		}
-		printf("DEBUG [process_command]: parse_input exitoso\n");
 		exit_status = process_valid_command(cmds, env_list, env_copy);
 		ft_free_cmdlist(&cmds);
 	}

@@ -78,7 +78,8 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/pipelines/pipeline_redirections.c \
        $(SRC_DIR)/pipelines/pipelines_utils.c \
        $(SRC_DIR)/pipelines/pipeline_utils.c \
-       $(SRC_DIR)/redirections/redirections.c
+       $(SRC_DIR)/redirections/redirections.c \
+       $(SRC_DIR)/redirections/redirections_utils.c
 
 # Object files
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

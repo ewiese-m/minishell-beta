@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 10:41:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 20:19:54 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:24:38 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,9 @@ void	update_env(char *name, char *value, char **envp);
 int		get_env_size(char **envp);
 void	add_to_env(char *var, char **envp);
 void	remove_from_env(char *name, char **envp);
+
+/*echo utils*/
+int		setup_echo_redirection(t_command *cmd, int *original_stdout);
+void	restore_stdout(int original_stdout);
 
 #endif

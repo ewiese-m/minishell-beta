@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/14 10:03:29 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/14 10:15:50 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 12:26:50 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,3 +20,4 @@ void	redirections_error_1(char *file)
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 };
+

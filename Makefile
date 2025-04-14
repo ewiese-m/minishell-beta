@@ -52,6 +52,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/builtins/builtins_main.c \
        $(SRC_DIR)/builtins/cd.c \
        $(SRC_DIR)/builtins/echo.c \
+       $(SRC_DIR)/builtins/echo_utils/echo_utils.c \
        $(SRC_DIR)/builtins/env.c \
        $(SRC_DIR)/builtins/exit.c \
        $(SRC_DIR)/builtins/export.c \

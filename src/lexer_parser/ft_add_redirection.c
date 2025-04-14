@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:22:23 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/13 22:36:32 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 01:35:33 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,19 @@ int ft_add_redirection(char **table, t_command *cmd, int index, int len)
     {
         printf("DEBUG [ft_add_redirection]: Añadiendo archivo de entrada\n");
         cmd->from_file = ft_strdup(table[index] + len);
+		int fd = open(cmd->from_file, O_RDONLY);
+		if (fd == -1)
+		{
+			// Mostrar error
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(cmd->from_file, 2);
+			ft_putstr_fd(": No such file or directory\n", 2);
+
+			// Marca este comando como fallido y termina el procesamiento
+			cmd->redirect_error = 1;
+			return (0);  // Terminar parseo sin mostrar error de sintaxis
+		}
+		close(fd);
         printf("DEBUG [ft_add_redirection]: from_file después de strdup: '%s'\n",
                cmd->from_file ? cmd->from_file : "NULL");
     }

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:16:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/13 20:56:12 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/14 01:37:30 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,11 @@ int	process_command(char *line, t_env *env_list, char **env_copy)
 	cmds = ft_parse_input(line, env_list);
 	if (cmds)
 	{
+		if (cmds->redirect_error)
+		{
+			printf("DEBUG [process_command]: No ejecutar el comando, solo retornar código de error 1\n");
+			return (1);
+		}
 		printf("DEBUG [process_command]: parse_input exitoso\n");
 		exit_status = process_valid_command(cmds, env_list, env_copy);
 		ft_free_cmdlist(&cmds);

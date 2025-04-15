@@ -47,7 +47,9 @@ SRC		= 	ft_atoi.c \
 			gc_malloc.c \
 			gc_memory_wrappers.c \
 			gc_remove.c \
-			gc_track_fd.c
+			gc_track_fd.c \
+			get_next_line.c \
+			get_next_line_utils.c
 
 BONUS	=	ft_lstnew.c \
 			ft_lstadd_front.c \

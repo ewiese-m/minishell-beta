@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:48:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 13:20:00 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 19:11:20 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 
 int	apply_redirections(t_command *cmd, t_minishell *shell)
 {
+	int	i;
+
+	i = -1;
 	if (!cmd)
 		return (0);
 	if (cmd->redirect & IN_REDIR)
@@ -23,7 +26,7 @@ int	apply_redirections(t_command *cmd, t_minishell *shell)
 	}
 	else if (cmd->redirect & HEREDOC)
 	{
-		if (apply_heredoc(cmd, shell) != 0)
+		if (apply_heredoc(&cmd->hdocs_end[++i], cmd) != 0)
 			return (1);
 	}
 	if (cmd->redirect & OUT_REDIR || cmd->redirect & APPEND)

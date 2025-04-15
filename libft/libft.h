@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 10:31:37 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 01:54:55 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:37:15 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h> // Funciones de sistema
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 // Bloque 1: Funciones de caracteres
 int						ft_isalpha(int c);
@@ -101,7 +105,12 @@ void					ft_lstiter(t_list *lst, void (*f)(void *));
 t_list					*ft_lstmap(t_list *lst, void *(*f)(void *),
 							void (*del)(void *));
 
-// Bloque 6: Recolector de basura (Garbage Collector)
+// Bloque 6: Get next line!
+
+char					*get_next_line(int fd);
+char					*ft_strjoin_free(char const *s1, char const *s2);
+
+// Bloque 7: Recolector de basura (Garbage Collector)
 
 /* Estructura de nodo para la lista de punteros del recolector de basura */
 typedef struct s_mem_node

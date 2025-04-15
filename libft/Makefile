@@ -37,7 +37,17 @@ SRC		= 	ft_atoi.c \
 			ft_putchar_fd.c \
 			ft_putstr_fd.c \
 			ft_putendl_fd.c \
-			ft_putnbr_fd.c
+			ft_putnbr_fd.c \
+			gc_add.c \
+			gc_close_all_fds.c \
+			gc_close_fd.c \
+			gc_free_all.c \
+			gc_free.c \
+			gc_init.c \
+			gc_malloc.c \
+			gc_memory_wrappers.c \
+			gc_remove.c \
+			gc_track_fd.c
 
 BONUS	=	ft_lstnew.c \
 			ft_lstadd_front.c \

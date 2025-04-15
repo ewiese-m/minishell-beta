@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:06:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/14 00:24:44 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 02:15:49 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_minishell
 	bool				heredoc;
 	int					signal;
 	t_env				*envs;
+	t_gc				gc;
 }						t_minishell;
 
 /*

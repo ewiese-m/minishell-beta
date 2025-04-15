@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/12 11:23:29 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 10:50:02 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ t_command	*tokenize_parse_and_link_commands(char *line, t_env *env_list);
 int			ft_checkforgarbage(t_command *cmd);
 void		ft_removesurplusspaces(t_command *cmd);
 void		ft_create_fullcmd(t_command *cmd);
-t_command	*ft_parse_input(char *line, t_env *env_list);
-
+t_command	*ft_parse_input(char *line, t_minishell *shell);
 #endif

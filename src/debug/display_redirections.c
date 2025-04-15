@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/12 11:29:40 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:58:20 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ static void	display_input_redirection(t_command *cmd)
 		in_idx = 0;
 		while (cmd->from_file[in_idx])
 		{
-			//printf("[%s] ", cmd->from_file[in_idx]);
 			in_idx++;
 		}
 		printf("\n");

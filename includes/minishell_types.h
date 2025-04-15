@@ -6,12 +6,13 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:06:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 02:15:49 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:28:46 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_TYPES_H
 # define MINISHELL_TYPES_H
+
 /*
 ** Environment variable structure for linked list
 */
@@ -26,21 +27,8 @@ typedef struct s_env
 }						t_env;
 
 /*
-** Main shell structure // To change it
-*/
-typedef struct s_minishell
-{
-	bool				force_exit;
-	bool				heredoc;
-	int					signal;
-	t_env				*envs;
-	t_gc				gc;
-}						t_minishell;
-
-/*
 ** Command structure for parsing and execution
 */
-
 typedef struct s_command
 {
 	char				*command;
@@ -70,7 +58,22 @@ typedef struct s_pipe_exec
 	int					cmd_index;
 	int					cmd_count;
 	char				**envp;
+	struct s_minishell	*shell;
 }						t_pipe_exec;
+
+/*
+** Main shell structure
+*/
+typedef struct s_minishell
+{
+	bool				force_exit;
+	bool				heredoc;
+	int					signal;
+	t_env				*envs;
+	t_gc				gc;
+	char				**env_array;
+	int					exit_status;
+}						t_minishell;
 
 /*
 ** Redirection flags

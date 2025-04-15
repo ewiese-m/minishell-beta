@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:05:53 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 20:21:14 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:55:44 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,22 @@ void	print_env_vars(t_env *env_list)
 	{
 		print_single_var(current);
 		current = current->next;
+	}
+}
+
+/**
+ * Prints all environment variables in export format
+ */
+void	print_envp_vars(char **envp)
+{
+	int	i;
+
+	if (!envp)
+		return ;
+	i = 0;
+	while (envp && envp[i])
+	{
+		printf("declare -x %s\n", envp[i]);
+		i++;
 	}
 }

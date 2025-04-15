@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:56 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 18:02:59 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 12:37:21 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	execute_builtin_command(t_pipe_exec *exec_data)
 {
 	int	status;
 
-	status = execute_builtin(exec_data->cmd, exec_data->envp);
+	status = execute_builtin(exec_data->cmd, exec_data->shell);
 	exit(status);
 }
 
@@ -85,8 +85,7 @@ static void	execute_external_command(t_pipe_exec *exec_data)
  */
 void	execute_pipeline_command(t_pipe_exec *exec_data)
 {
-	if (setup_redirections(exec_data->cmd, exec_data->pipes,
-			exec_data->cmd_index, exec_data->cmd_count) != 0)
+	if (setup_redirections(exec_data) != 0)
 		handle_redirection_error(exec_data);
 	close_unused_pipes(exec_data);
 	if (is_builtin(exec_data->cmd->command))

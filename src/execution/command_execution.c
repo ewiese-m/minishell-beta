@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:56 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/12 14:59:19 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:08:18 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,22 @@
 /**
  * Sets up input/output redirections for a command
  */
-int	setup_redirections(t_command *cmd, int **pipes, int cmd_index,
-		int cmd_count)
+int	setup_redirections(t_pipe_exec *exec_data)
 {
-	if (cmd_index > 0 && cmd->input == 0)
+	if (exec_data->cmd_index > 0 && exec_data->cmd->input == 0)
 	{
-		if (dup2(pipes[cmd_index - 1][0], STDIN_FILENO) == -1)
+		if (dup2(exec_data->pipes[exec_data->cmd_index - 1][0], STDIN_FILENO) ==
+			-1)
 			return (1);
 	}
-	if (cmd_index < cmd_count - 1 && cmd->output == 1)
+	if (exec_data->cmd_index < exec_data->cmd_count - 1
+		&& exec_data->cmd->output == 1)
 	{
-		if (dup2(pipes[cmd_index][1], STDOUT_FILENO) == -1)
+		if (dup2(exec_data->pipes[exec_data->cmd_index][1], STDOUT_FILENO) ==
+			-1)
 			return (1);
 	}
-	return (apply_redirections(cmd));
+	return (apply_redirections(exec_data->cmd, exec_data->shell));
 }
 
 char	**prepare_execve_args(char *executable_path, char **full_cmd)

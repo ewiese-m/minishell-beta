@@ -1,7 +1,7 @@
 # Compiler and flags
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-# CFLAGS = -Wall -Wextra -g
+#CFLAGS = -Wall -Wextra -g
 INCLUDE = -I./includes -I./libft
 
 # Directories
@@ -79,8 +79,13 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/pipelines/pipeline_redirections.c \
        $(SRC_DIR)/pipelines/pipelines_utils.c \
        $(SRC_DIR)/pipelines/pipeline_utils.c \
+       $(SRC_DIR)/redirections/heredoc.c \
+       $(SRC_DIR)/redirections/input_redirection.c \
+       $(SRC_DIR)/redirections/output_redirection.c \
        $(SRC_DIR)/redirections/redirections.c \
-       $(SRC_DIR)/redirections/redirections_utils.c
+       $(SRC_DIR)/redirections/redirections_utils.c \
+       $(SRC_DIR)/gc_utils/gc_memory.c \
+       $(SRC_DIR)/gc_utils/gc_tracking.c
 
 # Object files
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

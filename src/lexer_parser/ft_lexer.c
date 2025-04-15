@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 19:33:29 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 13:40:09 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:26:02 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,6 @@ static char	**resize_cmd_table(char **cmd_table, int *count, int *capacity)
 	return (cmd_table);
 }
 
-// Mantener env_list en cmd_table[0]
-// cmd_table[0] = NULL; // NO BORRAR env_list
-// Comenzamos en 1 porque 0 es para env_list
 char	**ft_lexer(char *line, t_env *env_list)
 {
 	char	**cmd_table;
@@ -95,13 +92,9 @@ char	**ft_lexer(char *line, t_env *env_list)
 		if (!line[i])
 			break ;
 		if (line[i] == '<' || line[i] == '>')
-		{
 			handle_redirection(line, &i, cmd_table, &count);
-		}
 		else
-		{
 			process_regular_token(line, &i, cmd_table, &count);
-		}
 		cmd_table = resize_cmd_table(cmd_table, &count, &capacity);
 	}
 	cmd_table[count] = NULL;

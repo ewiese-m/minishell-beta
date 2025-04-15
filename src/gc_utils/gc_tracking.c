@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:40:40 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:21:07 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:45:46 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,59 +23,51 @@ void	shell_track_fd(t_minishell *shell, int fd)
 }
 
 /**
+ * Track string array elements in the garbage collector
+ */
+static void	track_string_array(t_minishell *shell, char **array)
+{
+	int	i;
+
+	if (!array)
+		return ;
+	gc_add(&shell->gc, array);
+	i = 0;
+	while (array[i])
+	{
+		gc_add(&shell->gc, array[i]);
+		i++;
+	}
+}
+
+/**
+ * Track command redirections in the garbage collector
+ */
+static void	track_command_redirections(t_minishell *shell, t_command *cmd)
+{
+	if (cmd->from_file)
+		gc_add(&shell->gc, cmd->from_file);
+	if (cmd->hdocs_end)
+		track_string_array(shell, cmd->hdocs_end);
+	if (cmd->to_file)
+		track_string_array(shell, cmd->to_file);
+}
+
+/**
  * Track all memory allocations in a command structure
  */
 void	shell_track_command(t_minishell *shell, t_command *cmd)
 {
-	int	i;
-
 	if (!shell || !cmd)
 		return ;
 	gc_add(&shell->gc, cmd);
 	if (cmd->command)
 		gc_add(&shell->gc, cmd->command);
 	if (cmd->args)
-	{
-		gc_add(&shell->gc, cmd->args);
-		i = 0;
-		while (cmd->args[i])
-		{
-			gc_add(&shell->gc, cmd->args[i]);
-			i++;
-		}
-	}
+		track_string_array(shell, cmd->args);
 	if (cmd->full_cmd)
-	{
-		gc_add(&shell->gc, cmd->full_cmd);
-		i = 0;
-		while (cmd->full_cmd[i])
-		{
-			gc_add(&shell->gc, cmd->full_cmd[i]);
-			i++;
-		}
-	}
-	if (cmd->from_file)
-		gc_add(&shell->gc, cmd->from_file);
-	if (cmd->hdocs_end)
-	{
-		gc_add(&shell->gc, cmd->hdocs_end);
-		i = 0;
-		while (cmd->hdocs_end[i])
-		{
-			gc_add(&shell->gc, cmd->hdocs_end[i]);
-			i++;
-		}
-	}
-	if (cmd->to_file)
-	{
-		gc_add(&shell->gc, cmd->to_file);
-		i = 0;
-		while (cmd->to_file[i])
-		{
-			gc_add(&shell->gc, cmd->to_file[i]);
-			i++;
-		}
-	}
+		track_string_array(shell, cmd->full_cmd);
+	track_command_redirections(shell, cmd);
 	if (cmd->next)
 		shell_track_command(shell, cmd->next);
 }

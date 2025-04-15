@@ -13,6 +13,7 @@ LIBFT_DIR = libft
 # Source files
 SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/main/process_command.c \
+       $(SRC_DIR)/main/main_utils.c \
        $(SRC_DIR)/debug/display_command.c \
        $(SRC_DIR)/debug/display_command_details.c \
        $(SRC_DIR)/debug/display_redirections.c \
@@ -51,6 +52,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/signal_handling/signal.c \
        $(SRC_DIR)/builtins/builtins_main.c \
        $(SRC_DIR)/builtins/cd.c \
+       $(SRC_DIR)/builtins/cd_utils/cd_utils.c \
        $(SRC_DIR)/builtins/echo.c \
        $(SRC_DIR)/builtins/echo_utils/echo_utils.c \
        $(SRC_DIR)/builtins/env.c \

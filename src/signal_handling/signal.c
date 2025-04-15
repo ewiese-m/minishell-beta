@@ -6,13 +6,13 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:31:55 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:40:16 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 17:14:48 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_minishell *g_shell_ptr = NULL;
+static t_minishell	*g_shell_ptr = NULL;
 
 /*
 ** Register the shell instance for use in signal handlers
@@ -33,10 +33,8 @@ void	ft_signal_ctrl_c(int signal)
 	rl_replace_line("", 1);
 	rl_on_new_line();
 	rl_redisplay();
-
-	// If we have a shell pointer, update the exit status
 	if (g_shell_ptr && g_shell_ptr->envs)
-		update_exit_status(g_shell_ptr->envs, 130); // 128 + SIGINT (2)
+		update_exit_status(g_shell_ptr->envs, 130);
 }
 
 /*
@@ -57,8 +55,6 @@ void	ft_signal_heredoc(int signal)
 {
 	(void)signal;
 	write(1, "\n", 1);
-
-
 	if (g_shell_ptr)
 		shell_cleanup(g_shell_ptr, 130);
 	else

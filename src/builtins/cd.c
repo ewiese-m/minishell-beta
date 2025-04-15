@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:58:30 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 12:47:28 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:37:00 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,33 +68,22 @@ static void	update_pwd_env(t_minishell *shell)
 {
 	char	cwd[PATH_MAX];
 	char	*pwd_entry;
-	int		i;
+	int		pwd_index;
 
 	if (!shell || !shell->env_array)
 		return ;
 	if (getcwd(cwd, PATH_MAX))
 	{
-		i = 0;
-		while (shell->env_array[i])
+		pwd_index = find_pwd_index(shell->env_array);
+		if (pwd_index >= 0)
 		{
-			if (ft_strncmp(shell->env_array[i], "PWD=", 4) == 0)
-			{
-				pwd_entry = shell_strjoin(shell, "PWD=", cwd);
-				if (!pwd_entry)
-					return ;
-				shell->env_array[i] = pwd_entry;
+			pwd_entry = shell_strjoin(shell, "PWD=", cwd);
+			if (!pwd_entry)
 				return ;
-			}
-			i++;
+			shell->env_array[pwd_index] = pwd_entry;
 		}
-		pwd_entry = shell_strjoin(shell, "PWD=", cwd);
-		if (!pwd_entry)
-			return ;
-		i = 0;
-		while (shell->env_array[i])
-			i++;
-		shell->env_array[i] = pwd_entry;
-		shell->env_array[i + 1] = NULL;
+		else
+			add_new_pwd(shell, cwd);
 	}
 }
 

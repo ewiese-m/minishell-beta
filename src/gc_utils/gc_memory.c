@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 10:30:40 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:22:57 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:43:23 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,39 +58,26 @@ char	*shell_strjoin(t_minishell *shell, char const *s1, char const *s2)
  */
 void	shell_cleanup(t_minishell *shell, int status)
 {
+	int		i;
+	t_env	*current_env;
+	t_env	*next_env;
+
 	if (!shell)
 		exit(status);
-
-	// Clear readline history
 	rl_clear_history();
-
-	// Free environment variables
 	if (shell->env_array)
 	{
-		int i = 0;
+		i = 0;
 		while (shell->env_array[i])
-		{
-			// No need to free individually if tracked by GC
 			i++;
-		}
 	}
-
-	// Free environment linked list
-	t_env *current_env = shell->envs;
-	t_env *next_env;
+	current_env = shell->envs;
 	while (current_env)
 	{
 		next_env = current_env->next;
-		// No need to free individually if tracked by GC
 		current_env = next_env;
 	}
-
-	// Close all tracked file descriptors
 	gc_close_all_fds(&shell->gc);
-
-	// Free all memory tracked by the garbage collector
 	gc_free_all(&shell->gc);
-
-	// Exit with the provided status
 	exit(status);
 }

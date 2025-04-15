@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:10:41 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 13:11:20 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:42:26 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,12 @@ int	execute_commands(t_command *cmd_list, t_minishell *shell)
 }
 
 /**
- * Executes a list of commands through a pipeline
+ * Track pipeline resources in the shell's garbage collector
  */
-int	execute_cmd_list(t_command *cmd_list, t_minishell *shell)
+static void	track_pipeline_resources(t_minishell *shell, t_pipeline *pipeline)
 {
-	t_pipeline	*pipeline;
-	int			exit_status;
-	int			i;
+	int	i;
 
-	if (!cmd_list)
-		return (0);
-	pipeline = create_pipeline(cmd_list);
-	if (!pipeline)
-		return (1);
 	gc_add(&shell->gc, pipeline);
 	if (pipeline->commands)
 		gc_add(&shell->gc, pipeline->commands);
@@ -54,6 +47,22 @@ int	execute_cmd_list(t_command *cmd_list, t_minishell *shell)
 		}
 		gc_add(&shell->gc, pipeline->pipes);
 	}
+}
+
+/**
+ * Executes a list of commands through a pipeline
+ */
+int	execute_cmd_list(t_command *cmd_list, t_minishell *shell)
+{
+	t_pipeline	*pipeline;
+	int			exit_status;
+
+	if (!cmd_list)
+		return (0);
+	pipeline = create_pipeline(cmd_list);
+	if (!pipeline)
+		return (1);
+	track_pipeline_resources(shell, pipeline);
 	exit_status = execute_pipeline(pipeline, shell);
 	update_exit_status(shell->envs, exit_status);
 	return (exit_status);

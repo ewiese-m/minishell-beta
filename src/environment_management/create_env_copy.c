@@ -6,11 +6,12 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 21:36:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:07:01 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:39:54 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
 /*
 static void	init_env_copy(char **env_copy, int size, int extra_space,
 		char **envp)
@@ -46,24 +47,20 @@ char	**create_env_copy(t_minishell *shell, char **envp)
 	while (envp[size])
 		size++;
 	extra_space = 100000;
-	env_copy = (char **)gc_malloc(&shell->gc, (size + extra_space + 1) * sizeof(char *));
+	env_copy = (char **)gc_malloc(&shell->gc, (size + extra_space + 1)
+			* sizeof(char *));
 	if (!env_copy)
 		return (NULL);
-
 	i = 0;
 	while (envp[i])
 	{
 		env_copy[i] = safe_strdup(&shell->gc, envp[i]);
 		if (!env_copy[i])
-		{
 			return (NULL);
-		}
 		i++;
 	}
-
 	env_copy[i] = NULL;
 	while (++i < size + extra_space)
 		env_copy[i] = NULL;
-
 	return (env_copy);
 }

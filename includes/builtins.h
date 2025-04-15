@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 10:41:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:11:06 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:38:04 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,9 @@ void	shell_remove_from_env(t_minishell *shell, char *name);
 int		setup_echo_redirection(t_command *cmd, t_minishell *shell,
 			int *original_stdout);
 void	restore_stdout(int original_stdout);
+
+/* cd utils */
+void	add_new_pwd(t_minishell *shell, char *cwd);
+int		find_pwd_index(char **env_array);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:16:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:14:23 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:32:36 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,12 @@ static int	process_valid_command(t_command *cmds, t_minishell *shell)
 		exit_status = builtin_exit(cmds);
 		if (exit_status < 0)
 		{
-			// Negative exit status means we should exit the shell
 			if (exit_status == -1)
-				shell_cleanup(shell, 0); // Default exit
+				shell_cleanup(shell, 0);
 			else if (exit_status == -2)
-				shell_cleanup(shell, 255); // Numeric argument required error
+				shell_cleanup(shell, 2);
 			else
-				shell_cleanup(shell, -exit_status); // User specified exit code
+				shell_cleanup(shell, -exit_status);
 		}
 		return (exit_status);
 	}

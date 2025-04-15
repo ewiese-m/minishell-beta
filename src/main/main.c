@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:41:40 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:13:00 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	minishell_loop(t_minishell *shell)
 static int	initialize_shell(t_minishell *shell, char **envp)
 {
 	gc_init(&shell->gc);
-	shell->env_array = create_env_copy(envp);
+	shell->env_array = create_env_copy(shell,envp);
 	if (shell->env_array)
 		gc_add(&shell->gc, shell->env_array);
 	shell->envs = ft_get_envp(envp);

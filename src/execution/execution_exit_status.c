@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.c                                      :+:      :+:    :+:   */
+/*   execution_exit_status.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:08:19 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/08 12:05:52 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:10:36 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	add_exit_status_var(t_env *env_list)
 			break ;
 		current = current->next;
 	}
-	exit_var = (t_env *)ft_calloc(1, sizeof(t_env));
+	exit_var = (t_env *)malloc(sizeof(t_env));
 	if (!exit_var)
 		return ;
 	exit_var->key = ft_strdup("?");

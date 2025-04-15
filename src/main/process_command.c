@@ -6,13 +6,13 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 18:16:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 13:13:09 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:14:23 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-static int	handle_exit_command(t_command *cmds, t_minishell *shell)
+/* static int	handle_exit_command(t_command *cmds, t_minishell *shell)
 {
 	int	exit_status;
 
@@ -21,7 +21,7 @@ static int	handle_exit_command(t_command *cmds, t_minishell *shell)
 		shell->force_exit = true;
 	return (exit_status);
 }
-
+ */
 static int	handle_builtin_command(t_command *cmds, t_minishell *shell)
 {
 	int	exit_status;
@@ -45,7 +45,18 @@ static int	process_valid_command(t_command *cmds, t_minishell *shell)
 
 	if (ft_strcmp(cmds->command, "exit") == 0)
 	{
-		exit_status = handle_exit_command(cmds, shell);
+		exit_status = builtin_exit(cmds);
+		if (exit_status < 0)
+		{
+			// Negative exit status means we should exit the shell
+			if (exit_status == -1)
+				shell_cleanup(shell, 0); // Default exit
+			else if (exit_status == -2)
+				shell_cleanup(shell, 255); // Numeric argument required error
+			else
+				shell_cleanup(shell, -exit_status); // User specified exit code
+		}
+		return (exit_status);
 	}
 	else if (is_builtin(cmds->command) && cmds->next == NULL)
 	{

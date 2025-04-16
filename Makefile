@@ -28,6 +28,8 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/lexer_parser/ft_free_cmdlist.c \
        $(SRC_DIR)/lexer_parser/ft_free_dstr.c \
        $(SRC_DIR)/lexer_parser/ft_get_redirection.c \
+       $(SRC_DIR)/lexer_parser/ft_handle_redirection.c \
+       $(SRC_DIR)/lexer_parser/ft_lexer_utils.c \
        $(SRC_DIR)/lexer_parser/ft_lexer.c \
        $(SRC_DIR)/lexer_parser/ft_many_cmd.c \
        $(SRC_DIR)/lexer_parser/ft_many_redirect.c \
@@ -35,6 +37,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/lexer_parser/ft_parser.c \
        $(SRC_DIR)/lexer_parser/ft_realloc.c \
        $(SRC_DIR)/lexer_parser/ft_removesurplusspaces.c \
+       $(SRC_DIR)/lexer_parser/ft_tokenize_utils.c \
        $(SRC_DIR)/lexer_parser/ft_tokenize.c \
        $(SRC_DIR)/lexer_parser/parse_cmd_into_array.c \
        $(SRC_DIR)/lexer_parser/tokenize_parse_and_link_commands.c \

@@ -1,5 +1,5 @@
 # Compiler and flags
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -Wall -Wextra -g
 #CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
@@ -40,6 +40,9 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/lexer_parser/ft_removesurplusspaces.c \
        $(SRC_DIR)/lexer_parser/ft_tokenize_utils.c \
        $(SRC_DIR)/lexer_parser/ft_tokenize.c \
+       $(SRC_DIR)/lexer_parser/ft_was_quoted_content_utils_2.c \
+       $(SRC_DIR)/lexer_parser/ft_was_quoted_content_utils.c \
+       $(SRC_DIR)/lexer_parser/ft_was_quoted_content.c \
        $(SRC_DIR)/lexer_parser/parse_cmd_into_array.c \
        $(SRC_DIR)/lexer_parser/tokenize_parse_and_link_commands.c \
        $(SRC_DIR)/lexer_parser/ft_expand_variable.c \

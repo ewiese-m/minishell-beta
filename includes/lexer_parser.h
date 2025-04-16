@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/16 14:21:04 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/17 01:38:03 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ char		*ft_concat_and_free(char *str1, char *str2);
 char		**ft_resize_string_array(char **array, int current_size,
 				int target_size);
 int			ft_get_redirection(char *token);
+int			ft_was_quoted_content(char *token);
 void		ft_arrange_table(char **table, int index, int len);
 char		**ft_add_io_file(char **old_files, char *new_file,
 				int len_redirection);
@@ -65,5 +66,17 @@ char		*handle_dollar_sign(char *str, char *input, int *i,
 				t_env *env_list);
 char		*handle_regular_char(char *str, char *input, int *i);
 void		token_skip_whitespace(char *input, int *i);
+
+/* ft_was_quoted_content_utils */
+int			is_special_char(char c);
+int			is_double_operator(char a, char b);
+int			is_null_or_empty(char *token);
+int			is_basic_operator(char *token);
+int			is_single_non_special(char *token);
+int			has_spaces(char *token);
+int			count_special_chars(char *token);
+int			has_consecutive_special(char *token);
+int			has_suspicious_start(char *token);
+int			has_mid_quotes(char *token);
 
 #endif

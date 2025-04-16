@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:43:39 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/16 15:09:08 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/17 01:51:35 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PROMPT "\001\033[0m\002👩🏻 \001\033[1;36m\002ADHD_Edu\001\033[0m\002 > "
+# define PROMPT " \033[1;36mADHD_EDU\033[0m > "
 
 /* 1. First, Libft */
 # include "../libft/libft.h"

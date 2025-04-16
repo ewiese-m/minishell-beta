@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:50:02 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 21:54:37 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,21 @@ int			ft_checkforgarbage(t_command *cmd);
 void		ft_removesurplusspaces(t_command *cmd);
 void		ft_create_fullcmd(t_command *cmd);
 t_command	*ft_parse_input(char *line, t_minishell *shell);
+
+/* ft_lexer utils */
+char		**init_cmd_table(int capacity);
+void		skip_whitespace(char *line, int *i);
+void		ft_handle_redirection(char *line, int *i, char **cmd_table,
+				int *count);
+void		process_regular_token(char *line, int *i, char **cmd_table,
+				int *count);
+char		**resize_cmd_table(char **cmd_table, int *count, int *capacity);
+
+/* ft_tokenize utils */
+char		*handle_quotes(char *str, char *input, int *i, t_env *env_list);
+char		*handle_dollar_sign(char *str, char *input, int *i,
+				t_env *env_list);
+char		*handle_regular_char(char *str, char *input, int *i);
+void		token_skip_whitespace(char *input, int *i);
+
 #endif

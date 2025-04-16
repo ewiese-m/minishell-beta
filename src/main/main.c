@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:47:20 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 21:46:07 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ int	main(int argc, char **argv, char **envp)
 		shell_cleanup(&shell, 1);
 		return (1);
 	}
-	register_shell_for_signals(&shell);
+	//register_shell_for_signals(&shell);
 	setup_signals();
 	minishell_loop(&shell);
 	shell_cleanup(&shell, shell.exit_status);

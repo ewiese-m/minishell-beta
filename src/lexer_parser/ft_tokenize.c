@@ -1,108 +1,84 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tokenize.c                                      :+:      :+:    :+:   */
+/*   ft_tokenize copy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 19:33:11 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/10 14:08:56 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 21:52:45 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+#include "minishell.h"
 
-static char	*handle_quotes(char *str, char *input, int *i, t_env *env_list)
+static int	is_redirect(char c)
 {
-	char	*result;
-	char	quote_type;
-
-	quote_type = input[*i];
-	result = ft_process_quotes(str, input, i, env_list);
-	if (input[*i] == quote_type)
-		(*i)++;
-	return (result);
+	return (c == '>' || c == '<');
 }
 
-static char	*handle_dollar_sign(char *str, char *input, int *i, t_env *env_list)
-{
-	char	*expanded;
-	char	*old;
-
-	expanded = ft_extract_env_var(input, i, env_list);
-	old = str;
-	str = ft_strjoin(str, expanded);
-	free(old);
-	free(expanded);
-	(*i)++;
-	return (str);
-}
-
-static char	*handle_regular_char(char *str, char *input, int *i)
-{
-	char	tmp[2];
-	char	*old;
-
-	tmp[0] = input[*i];
-	tmp[1] = '\0';
-	old = str;
-	str = ft_strjoin(str, tmp);
-	free(old);
-	(*i)++;
-	return (str);
-}
-
-static void	skip_whitespace(char *input, int *i)
-{
-	while (input[*i] && (input[*i] == ' ' || (input[*i] >= '\t'
-				&& input[*i] <= '\r')))
-		(*i)++;
-}
-
-char	*ft_tokenize(char *str, char *input, int *index, t_env *env_list)
+static char	*handle_redirect(char *str, char *input, int *index)
 {
 	int		i;
 	char	tmp[2];
 
 	i = *index;
-	if (input[i] == '>' || input[i] == '<')
+	if (input[i] == '>' && input[i + 1] == '>')
 	{
-		if (input[i] == '>' && input[i + 1] == '>')
-		{
-			str = ft_concat_and_free(str, ft_strdup(">>"));
-			*index = i + 2;
-		}
-		else if (input[i] == '<' && input[i + 1] == '<')
-		{
-			str = ft_concat_and_free(str, ft_strdup("<<"));
-			*index = i + 2;
-		}
-		else
-		{
-			tmp[0] = input[i];
-			tmp[1] = '\0';
-			str = ft_concat_and_free(str, ft_strdup(tmp));
-			*index = i + 1;
-		}
-		return (str);
+		str = ft_concat_and_free(str, ft_strdup(">>"));
+		*index = i + 2;
 	}
-	while (input[i] && input[i] != ' ' && input[i] != '<' && input[i] != '>')
+	else if (input[i] == '<' && input[i + 1] == '<')
 	{
-		if (input[i] == '"' || input[i] == '\'')
-			str = handle_quotes(str, input, &i, env_list);
-		else if (input[i] == '$')
-			str = handle_dollar_sign(str, input, &i, env_list);
+		str = ft_concat_and_free(str, ft_strdup("<<"));
+		*index = i + 2;
+	}
+	else
+	{
+		tmp[0] = input[i];
+		tmp[1] = '\0';
+		str = ft_concat_and_free(str, ft_strdup(tmp));
+		*index = i + 1;
+	}
+	return (str);
+}
+
+static char	*parse_word(char *str, char *input, int *i, t_env *env_list)
+{
+	while (input[*i] && !is_redirect(input[*i]) && input[*i] != ' ')
+	{
+		if (input[*i] == '"' || input[*i] == '\'')
+			str = handle_quotes(str, input, i, env_list);
+		else if (input[*i] == '$')
+			str = handle_dollar_sign(str, input, i, env_list);
 		else
-			str = handle_regular_char(str, input, &i);
-		if (!input[i])
+			str = handle_regular_char(str, input, i);
+		if (!input[*i])
 			break ;
 	}
-	if (input[i] == '<' || input[i] == '>')
+	return (str);
+}
+
+static void	skip_spaces_and_check_redirect(char *input, int *i, int *index)
+{
+	if (is_redirect(input[*i]))
 	{
-		*index = i;
-		return (str);
+		*index = *i;
+		return ;
 	}
-	skip_whitespace(input, &i);
-	*index = i;
+	token_skip_whitespace(input, i);
+	*index = *i;
+}
+
+char	*ft_tokenize(char *str, char *input, int *index, t_env *env_list)
+{
+	int	i;
+
+	i = *index;
+	if (is_redirect(input[i]))
+		return (handle_redirect(str, input, index));
+	str = parse_word(str, input, &i, env_list);
+	skip_spaces_and_check_redirect(input, &i, index);
 	return (str);
 }

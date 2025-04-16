@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 19:33:11 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 21:53:33 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:57:07 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,24 @@ char	*handle_dollar_sign(char *str, char *input, int *i, t_env *env_list)
 	char	*old;
 
 	expanded = ft_extract_env_var(input, i, env_list);
-	old = str;
-	str = ft_strjoin(str, expanded);
-	free(old);
-	free(expanded);
+	if (expanded && *expanded == '\0' && *str == '\0')
+	{
+		free(expanded);
+		(*i)++;
+		while (input[*i] && (input[*i] == ' ' || (input[*i] >= '\t'
+					&& input[*i] <= '\r')))
+			(*i)++;
+		if (input[*i])
+			return (handle_regular_char(str, input, i));
+		return (str);
+	}
+	else if (expanded)
+	{
+		old = str;
+		str = ft_strjoin(str, expanded);
+		free(old);
+		free(expanded);
+	}
 	(*i)++;
 	return (str);
 }

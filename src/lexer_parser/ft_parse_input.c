@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:17:04 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:25:59 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:37:24 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_command	*ft_parse_input(char *line, t_minishell *shell)
 		return (handle_parse_error(line));
 	if (!is_valid_cmd(cmd))
 	{
+		ft_free_cmdlist(&cmd);
 		return (NULL);
 	}
 	clean_and_prepare_cmd(cmd);

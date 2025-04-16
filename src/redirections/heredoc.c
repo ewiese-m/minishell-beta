@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:17:02 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 19:09:48 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:17:17 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	apply_heredoc(char **hdocs_end, t_command *cmd)
 	int	fd;
 
 	if (!access("Eduardo_ADHD_tmp.txt", F_OK))
-		unlink("Eduardo_ADHD.txt");
+		unlink("Eduardo_ADHD_tmp.txt");
 	fd = read_hdocs(hdocs_end[0]);
 	close(fd);
 	if (hdocs_end[1])
 		return (-1);
-	cmd->input = open("Eduardo_ADHD.txt", O_RDONLY);
+	cmd->input = open("Eduardo_ADHD_tmp.txt", O_RDONLY);
 	return (fd);
 }

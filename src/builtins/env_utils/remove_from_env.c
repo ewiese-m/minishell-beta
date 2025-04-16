@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:57:09 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 20:27:49 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 11:21:10 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,28 @@ static void	shift_env_entries(char **envp, int start_idx)
 	}
 }
 
+// Function for use in a shell context where GC is available
+void	shell_remove_from_env(t_minishell *shell, char *name)
+{
+	int	i;
+	int	len;
+
+	if (!name || !shell->env_array)
+		return ;
+	len = ft_strlen(name);
+	i = 0;
+	while (shell->env_array[i])
+	{
+		if (is_matching_var(shell->env_array[i], name, len))
+		{
+			shift_env_entries(shell->env_array, i);
+			return ;
+		}
+		i++;
+	}
+}
+
+// Legacy function for compatibility
 void	remove_from_env(char *name, char **envp)
 {
 	int	i;

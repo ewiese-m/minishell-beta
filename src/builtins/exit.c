@@ -6,20 +6,22 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:59:55 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 17:50:11 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:32:01 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/**
+ * gets the path to change directory to, idk if its correct.
+ */
 
 int	builtin_exit(t_command *cmd)
 {
 	int	exit_code;
 
 	if (!cmd->args[1])
-	{
 		return (-1);
-	}
 	if (!is_valid_exit_arg(cmd->args[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
@@ -35,11 +37,3 @@ int	builtin_exit(t_command *cmd)
 	exit_code = ft_atoi(cmd->args[1]);
 	return (-(exit_code & 255));
 }
-// Cuando cmd->args[1] no es un argumento numérico válido,
-// se llama a exit(255) directamente,
-// lo que significa que no se liberan todos los recursos
-// antes de terminar el programa.
-// Esta es una decisión de diseño, pero podría ser mejor
-// devolver un código que permita a la función
-// principal manejar la limpieza antes de salir.
-// aca llamar un garbage collector!	//rl_clear_history();

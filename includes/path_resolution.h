@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:29:59 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:36:55 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:03:51 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@
 
 int		handle_command_not_found(char *cmd);
 int		handle_permission_denied(char *path);
+int		handle_is_a_directory(char *cmd);
 int		handle_fork_error(void);
 int		handle_execve_error(char *path);
 int		handle_wait_error(void);
 int		is_executable(char *path);
+int		is_directory(char *path);
 char	*check_direct_path(char *cmd);
 void	free_path_array(char **paths);
 char	**get_paths(char **envp);

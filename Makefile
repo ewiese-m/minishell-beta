@@ -1,7 +1,8 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
-# CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror
+#CFLAGS = -Wall -Wextra -g
+#CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 INCLUDE = -I./includes -I./libft
 
 # Directories
@@ -13,6 +14,7 @@ LIBFT_DIR = libft
 # Source files
 SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/main/process_command.c \
+       $(SRC_DIR)/main/main_utils.c \
        $(SRC_DIR)/debug/display_command.c \
        $(SRC_DIR)/debug/display_command_details.c \
        $(SRC_DIR)/debug/display_redirections.c \
@@ -27,6 +29,8 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/lexer_parser/ft_free_cmdlist.c \
        $(SRC_DIR)/lexer_parser/ft_free_dstr.c \
        $(SRC_DIR)/lexer_parser/ft_get_redirection.c \
+       $(SRC_DIR)/lexer_parser/ft_handle_redirection.c \
+       $(SRC_DIR)/lexer_parser/ft_lexer_utils.c \
        $(SRC_DIR)/lexer_parser/ft_lexer.c \
        $(SRC_DIR)/lexer_parser/ft_many_cmd.c \
        $(SRC_DIR)/lexer_parser/ft_many_redirect.c \
@@ -34,6 +38,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/lexer_parser/ft_parser.c \
        $(SRC_DIR)/lexer_parser/ft_realloc.c \
        $(SRC_DIR)/lexer_parser/ft_removesurplusspaces.c \
+       $(SRC_DIR)/lexer_parser/ft_tokenize_utils.c \
        $(SRC_DIR)/lexer_parser/ft_tokenize.c \
        $(SRC_DIR)/lexer_parser/parse_cmd_into_array.c \
        $(SRC_DIR)/lexer_parser/tokenize_parse_and_link_commands.c \
@@ -51,6 +56,7 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/signal_handling/signal.c \
        $(SRC_DIR)/builtins/builtins_main.c \
        $(SRC_DIR)/builtins/cd.c \
+       $(SRC_DIR)/builtins/cd_utils/cd_utils.c \
        $(SRC_DIR)/builtins/echo.c \
        $(SRC_DIR)/builtins/echo_utils/echo_utils.c \
        $(SRC_DIR)/builtins/env.c \
@@ -79,8 +85,13 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/pipelines/pipeline_redirections.c \
        $(SRC_DIR)/pipelines/pipelines_utils.c \
        $(SRC_DIR)/pipelines/pipeline_utils.c \
+       $(SRC_DIR)/redirections/heredoc.c \
+       $(SRC_DIR)/redirections/input_redirection.c \
+       $(SRC_DIR)/redirections/output_redirection.c \
        $(SRC_DIR)/redirections/redirections.c \
-       $(SRC_DIR)/redirections/redirections_utils.c
+       $(SRC_DIR)/redirections/redirections_utils.c \
+       $(SRC_DIR)/gc_utils/gc_memory.c \
+       $(SRC_DIR)/gc_utils/gc_tracking.c
 
 # Object files
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)

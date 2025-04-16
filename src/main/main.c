@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/05 20:05:05 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:53:36 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,75 +18,70 @@ static void	setup_signals(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-static void	cleanup_resources(t_env *env_list)
-{
-	t_env	*current;
-	t_env	*next;
-
-	current = env_list;
-	while (current)
-	{
-		next = current->next;
-		if (current->key)
-			free(current->key);
-		if (current->value)
-			free(current->value);
-		free(current);
-		current = next;
-	}
-	// clear_history();
-	rl_clear_history();
-	//rl_cleanup_after_signal();
-}
-
-static void	minishell_loop(t_env *env_list, char **env_copy)
+static void	minishell_loop(t_minishell *shell)
 {
 	char	*line;
 	int		exit_status;
 
-	while (1)
+	while (!shell->force_exit)
 	{
-		line = readline("minishell> ");
+		line = readline(PROMPT);
 		if (!line)
-		{
 			break ;
-		}
-		add_history(line);
-		exit_status = process_command(line, env_list, env_copy);
+		gc_add(&shell->gc, line);
+		if (*line)
+			add_history(line);
+		exit_status = process_command(line, shell);
 		if (exit_status < 0)
 		{
-			update_exit_status(env_list, -exit_status);
+			update_exit_status(shell->envs, -exit_status);
+			shell->exit_status = -exit_status;
 			break ;
 		}
 		else
 		{
-			update_exit_status(env_list, exit_status);
+			update_exit_status(shell->envs, exit_status);
+			shell->exit_status = exit_status;
 		}
 	}
-	rl_clear_history();
 }
 
-int	main(int argc, char **argv, char **envp)
+/* Check if the error message is correct or not. */
+static int	initialize_shell(t_minishell *shell, char **envp)
 {
-	t_env	*env_list;
-	char	**env_copy;
-	int		final_status;
-
-	final_status = 0;
-	(void)argc;
-	(void)argv;
-	env_copy = create_env_copy(envp);
-	setup_signals();
-	env_list = ft_get_envp(envp);
-	if (!env_list)
+	gc_init(&shell->gc);
+	shell->env_array = create_env_copy(shell, envp);
+	if (shell->env_array)
+		gc_add(&shell->gc, shell->env_array);
+	shell->envs = ft_get_envp(envp);
+	if (!shell->envs)
 	{
 		fprintf(stderr, "Error: Failed to initialize environment\n");
 		return (1);
 	}
-	add_exit_status_var(env_list);
-	minishell_loop(env_list, env_copy);
-	final_status = get_exit_status(env_list);
-	cleanup_resources(env_list);
-	free_env_array(env_copy);
-	return (final_status);
+	shell_track_env(shell, shell->envs);
+	shell->force_exit = false;
+	shell->heredoc = false;
+	shell->signal = 0;
+	shell->exit_status = 0;
+	add_exit_status_var(shell->envs);
+	return (0);
+}
+
+/* Where all the magic begins... */
+int	main(int argc, char **argv, char **envp)
+{
+	t_minishell	shell;
+
+	(void)argc;
+	(void)argv;
+	if (initialize_shell(&shell, envp) != 0)
+	{
+		shell_cleanup(&shell, 1);
+		return (1);
+	}
+	setup_signals();
+	minishell_loop(&shell);
+	shell_cleanup(&shell, shell.exit_status);
+	return (shell.exit_status);
 }

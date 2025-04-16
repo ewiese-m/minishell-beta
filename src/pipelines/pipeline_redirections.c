@@ -6,16 +6,17 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:00:20 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/08 12:33:09 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:25 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Forks and executes each command in the pipeline
+ * forks and executes each command in the pipeline
  */
-int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids, char **envp)
+int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
+		t_minishell *shell)
 {
 	int			i;
 	t_pipe_exec	exec_data;
@@ -35,7 +36,8 @@ int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids, char **envp)
 			exec_data.pipes = pipeline->pipes;
 			exec_data.cmd_index = i;
 			exec_data.cmd_count = pipeline->cmd_count;
-			exec_data.envp = envp;
+			exec_data.envp = shell->env_array;
+			exec_data.shell = shell;
 			execute_pipeline_command(&exec_data);
 		}
 		i++;
@@ -44,7 +46,7 @@ int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids, char **envp)
 }
 
 /**
- * Closes all pipes except those needed for the current command
+ * closes all pipes except those needed for the current command
  */
 void	close_other_pipes(int **pipes, int cmd_index, int cmd_count)
 {

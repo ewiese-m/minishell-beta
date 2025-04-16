@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/12 11:23:29 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:21:04 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LEXER_PARSER_H
 
 # include "minishell.h"
+
+/* Charlene part -_- */
 
 char		*ft_expand_variable(char *input, t_env *env_list);
 char		*ft_extract_env_var(char *in_put, int *index, t_env *env_list);
@@ -46,6 +48,22 @@ t_command	*tokenize_parse_and_link_commands(char *line, t_env *env_list);
 int			ft_checkforgarbage(t_command *cmd);
 void		ft_removesurplusspaces(t_command *cmd);
 void		ft_create_fullcmd(t_command *cmd);
-t_command	*ft_parse_input(char *line, t_env *env_list);
+t_command	*ft_parse_input(char *line, t_minishell *shell);
+
+/* ft_lexer utils */
+char		**init_cmd_table(int capacity);
+void		skip_whitespace(char *line, int *i);
+void		ft_handle_redirection(char *line, int *i, char **cmd_table,
+				int *count);
+void		process_regular_token(char *line, int *i, char **cmd_table,
+				int *count);
+char		**resize_cmd_table(char **cmd_table, int *count, int *capacity);
+
+/* ft_tokenize utils */
+char		*handle_quotes(char *str, char *input, int *i, t_env *env_list);
+char		*handle_dollar_sign(char *str, char *input, int *i,
+				t_env *env_list);
+char		*handle_regular_char(char *str, char *input, int *i);
+void		token_skip_whitespace(char *input, int *i);
 
 #endif

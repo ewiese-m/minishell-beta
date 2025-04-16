@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 01:26:06 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 01:34:18 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/15 16:16:09 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	gc_free_all(t_gc *gc)
 	t_mem_node	*current;
 	t_mem_node	*next;
 
-	if (!gc)
+	if (!gc || gc->mem_list)
 		return ;
 	current = gc->mem_list;
 	while (current)

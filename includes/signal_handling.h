@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:35 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 15:37:27 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:23:17 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 
 # include "minishell.h"
 
+/* Signals.. without global variables. */
+
 void	ft_signal_ctrl_c(int signal);
+void	setup_child_signals(void);
+void	ft_signal_heredoc(int signal);
+//void	register_shell_for_signals(t_minishell *shell);
 
 #endif

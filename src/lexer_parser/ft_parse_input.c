@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 20:17:04 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/30 13:56:20 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:37:24 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,27 +43,28 @@ static t_command	*handle_parse_error(char *line)
 	return (NULL);
 }
 
-t_command	*ft_parse_input(char *line, t_env *env_list)
+t_command	*ft_parse_input(char *line, t_minishell *shell)
 {
 	t_command	*cmd;
 	char		*line_copy;
 	char		*trimmed_line;
 
-	line_copy = ft_strdup(line);
+	line_copy = shell_strdup(shell, line);
 	if (!line_copy)
 		return (NULL);
 	trimmed_line = skip_leading_whitespace(line_copy);
 	if (*trimmed_line == '\0')
 	{
-		free(line_copy);
 		return (NULL);
 	}
-	cmd = tokenize_parse_and_link_commands(trimmed_line, env_list);
-	free(line_copy);
+	cmd = tokenize_parse_and_link_commands(trimmed_line, shell->envs);
 	if (!cmd)
 		return (handle_parse_error(line));
 	if (!is_valid_cmd(cmd))
-		return (ft_free_cmdlist(&cmd), NULL);
+	{
+		ft_free_cmdlist(&cmd);
+		return (NULL);
+	}
 	clean_and_prepare_cmd(cmd);
 	return (cmd);
 }

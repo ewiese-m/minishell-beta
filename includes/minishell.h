@@ -6,12 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 09:43:39 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/07 20:35:22 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:09:08 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+# define PROMPT "\001\033[0m\002👩🏻 \001\033[1;36m\002ADHD_Edu\001\033[0m\002 > "
 
 /* 1. First, Libft */
 # include "../libft/libft.h"
@@ -35,8 +37,10 @@
 # include "pipelines.h"
 /* 11. Pipelines and Redirections */
 # include "redirections.h"
+/* 12. GC Utils */
+# include "gc_utils.h"
 
-/* Display functions - For testing */
+/* display functions - For testing */
 void	display_command_info(t_command *cmds);
 void	display_command_name(t_command *cmd);
 void	display_arguments(t_command *cmd);

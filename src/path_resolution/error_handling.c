@@ -6,12 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:30:22 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/30 19:43:30 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:10:43 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/* We implemented it, but on the fork() part we already print the errors.
+ */
 int	handle_command_not_found(char *cmd)
 {
 	ft_putstr_fd("minishell: command not found: ", 2);

@@ -1,7 +1,8 @@
 # Compiler and flags
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror
 #CFLAGS = -Wall -Wextra -g
+#CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 INCLUDE = -I./includes -I./libft
 
 # Directories

@@ -6,11 +6,15 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 15:55:17 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:53:58 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:28:12 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/**
+ * implementation with ECHO with the n flag.
+ */
 
 static int	is_valid_n_option(char *arg)
 {

@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:58:30 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:37:00 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:27:37 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Gets the path to change directory to
+ * gets the path to change directory to, idk if its correct.
  */
 static char	*get_cd_path(t_command *cmd, t_minishell *shell)
 {
@@ -40,7 +40,7 @@ static char	*get_cd_path(t_command *cmd, t_minishell *shell)
 }
 
 /**
- * Changes the current directory
+ * changes the current directory
  */
 static int	change_directory(char *path)
 {
@@ -62,7 +62,7 @@ static int	change_directory(char *path)
 }
 
 /**
- * Updates the PWD environment variable
+ * updates the PWD environment variable
  */
 static void	update_pwd_env(t_minishell *shell)
 {
@@ -88,7 +88,7 @@ static void	update_pwd_env(t_minishell *shell)
 }
 
 /**
- * Implementation of the cd built-in command
+ * implementation of the cd built-in command
  */
 int	builtin_cd(t_command *cmd, t_minishell *shell)
 {

@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:18:47 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:59:19 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:22:47 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define PIPELINES_H
 
 # include "minishell.h"
+
+/* pipelines functions */
 
 t_pipeline	*create_pipeline(t_command *cmd_list);
 void		free_pipeline(t_pipeline *pipeline);

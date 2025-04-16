@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:56 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 13:08:18 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:36:31 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Sets up input/output redirections for a command
+ * sets up input/output redirections for a command
  */
 int	setup_redirections(t_pipe_exec *exec_data)
 {

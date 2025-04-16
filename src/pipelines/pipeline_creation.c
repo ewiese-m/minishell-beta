@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:13:50 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 17:42:08 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:42:00 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Creates pipes for the pipeline
+ * creates pipes for the pipeline
  */
 int	**create_pipes(int cmd_count)
 {

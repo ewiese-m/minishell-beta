@@ -6,11 +6,15 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:59:55 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:39:02 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:32:01 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/**
+ * gets the path to change directory to, idk if its correct.
+ */
 
 int	builtin_exit(t_command *cmd)
 {

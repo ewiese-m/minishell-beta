@@ -6,12 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/25 15:30:22 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/16 12:01:49 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:10:43 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+/* We implemented it, but on the fork() part we already print the errors.
+ */
 int	handle_command_not_found(char *cmd)
 {
 	ft_putstr_fd("minishell: command not found: ", 2);
@@ -61,11 +63,4 @@ int	handle_wait_error(void)
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 	return (1);
-}
-int	handle_is_a_directory(char *cmd)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putstr_fd(": Is a directory\n", 2);
-	exit(126);
 }

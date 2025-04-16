@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:27 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 21:54:37 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:21:04 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define LEXER_PARSER_H
 
 # include "minishell.h"
+
+/* Charlene part -_- */
 
 char		*ft_expand_variable(char *input, t_env *env_list);
 char		*ft_extract_env_var(char *in_put, int *index, t_env *env_list);

@@ -6,15 +6,17 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/19 14:06:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 12:28:46 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:22:20 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_TYPES_H
 # define MINISHELL_TYPES_H
 
+/* Here we separate the structures we used */
+
 /*
-** Environment variable structure for linked list
+** environment variable structure for linked list
 */
 typedef struct s_env
 {
@@ -27,7 +29,7 @@ typedef struct s_env
 }						t_env;
 
 /*
-** Command structure for parsing and execution
+** command structure for parsing and execution
 */
 typedef struct s_command
 {
@@ -62,7 +64,7 @@ typedef struct s_pipe_exec
 }						t_pipe_exec;
 
 /*
-** Main shell structure
+** main shell structure
 */
 typedef struct s_minishell
 {
@@ -76,7 +78,7 @@ typedef struct s_minishell
 }						t_minishell;
 
 /*
-** Redirection flags
+** redirection flags
 */
 # define IN_REDIR 1 /* Input redirection (<) */
 # define HEREDOC 2 /* Here document (<<) */

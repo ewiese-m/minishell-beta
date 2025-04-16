@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 16:05:53 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 12:45:39 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:32:14 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static int	add_new_env_var(t_minishell *shell, char *arg)
 }
 
 /**
- * Handles a single export argument
+ * handles a single export argument
  */
 static int	handle_export_arg(t_minishell *shell, char *arg)
 {
@@ -103,7 +103,7 @@ static int	handle_export_arg(t_minishell *shell, char *arg)
 }
 
 /**
- * Implementation of the export built-in command
+ * implementation of the export built-in command
  */
 int	builtin_export(t_command *cmd, t_minishell *shell)
 {

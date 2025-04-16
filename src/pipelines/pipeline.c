@@ -6,11 +6,13 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:48:33 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 17:43:26 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:41:49 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/* creacion y inicializacion de pipelines. */
 
 static int	count_commands(t_command *cmd)
 {

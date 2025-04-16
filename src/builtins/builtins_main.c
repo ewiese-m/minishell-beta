@@ -6,11 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 10:44:02 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:11:00 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:35:14 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+/* where the builtins are called and process it.
+IDK if i need to call other ones. */
 
 int	is_builtin(char *cmd)
 {

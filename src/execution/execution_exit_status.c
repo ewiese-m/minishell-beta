@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 11:08:19 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:10:36 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:36:42 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	add_exit_status_var(t_env *env_list)
 }
 
 /**
- * Updates the exit status in the environment list
+ * updates the exit status in the environment list
  */
 void	update_exit_status(t_env *env_list, int status)
 {

@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:10:41 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:42:26 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:37:15 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Main entry point for command execution
+ * main entry point for command execution
  */
 int	execute_commands(t_command *cmd_list, t_minishell *shell)
 {
@@ -27,7 +27,7 @@ int	execute_commands(t_command *cmd_list, t_minishell *shell)
 }
 
 /**
- * Track pipeline resources in the shell's garbage collector
+ * track pipeline resources in the shell's garbage collector
  */
 static void	track_pipeline_resources(t_minishell *shell, t_pipeline *pipeline)
 {
@@ -50,7 +50,8 @@ static void	track_pipeline_resources(t_minishell *shell, t_pipeline *pipeline)
 }
 
 /**
- * Executes a list of commands through a pipeline
+ * executes a list of commands through a pipeline
+ * check if the behavior with one single pipe is ok
  */
 int	execute_cmd_list(t_command *cmd_list, t_minishell *shell)
 {

@@ -6,12 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:48:01 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 19:11:20 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:43:06 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* initial point of the redirections!
+ */
 int	apply_redirections(t_command *cmd, t_minishell *shell)
 {
 	int	i;

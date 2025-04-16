@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 21:30:00 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 21:46:07 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:53:36 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	minishell_loop(t_minishell *shell)
 
 	while (!shell->force_exit)
 	{
-		line = readline("minishell> ");
+		line = readline(PROMPT);
 		if (!line)
 			break ;
 		gc_add(&shell->gc, line);
@@ -46,6 +46,7 @@ static void	minishell_loop(t_minishell *shell)
 	}
 }
 
+/* Check if the error message is correct or not. */
 static int	initialize_shell(t_minishell *shell, char **envp)
 {
 	gc_init(&shell->gc);
@@ -67,6 +68,7 @@ static int	initialize_shell(t_minishell *shell, char **envp)
 	return (0);
 }
 
+/* Where all the magic begins... */
 int	main(int argc, char **argv, char **envp)
 {
 	t_minishell	shell;
@@ -78,7 +80,6 @@ int	main(int argc, char **argv, char **envp)
 		shell_cleanup(&shell, 1);
 		return (1);
 	}
-	//register_shell_for_signals(&shell);
 	setup_signals();
 	minishell_loop(&shell);
 	shell_cleanup(&shell, shell.exit_status);

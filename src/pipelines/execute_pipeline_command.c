@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:56 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 12:37:21 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:39:54 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Handles errors in redirection setup
+ * handles errors in redirection setup
  */
 static void	handle_redirection_error(t_pipe_exec *exec_data)
 {
@@ -26,7 +26,7 @@ static void	handle_redirection_error(t_pipe_exec *exec_data)
 }
 
 /**
- * Closes pipe file descriptors not needed by the current command
+ * closes pipe file descriptors not needed by the current command
  */
 static void	close_unused_pipes(t_pipe_exec *exec_data)
 {
@@ -45,7 +45,7 @@ static void	close_unused_pipes(t_pipe_exec *exec_data)
 }
 
 /**
- * Executes builtin commands in the pipeline
+ * executes builtin commands in the pipeline
  */
 static void	execute_builtin_command(t_pipe_exec *exec_data)
 {
@@ -56,7 +56,7 @@ static void	execute_builtin_command(t_pipe_exec *exec_data)
 }
 
 /**
- * Executes external commands in the pipeline
+ * executes external commands in the pipeline
  */
 static void	execute_external_command(t_pipe_exec *exec_data)
 {
@@ -80,8 +80,8 @@ static void	execute_external_command(t_pipe_exec *exec_data)
 }
 
 /**
- * Executes a single command in the pipeline
- * Verificar despues el por que de la ejecucion no igual.
+ * executes a single command in the pipeline
+ * check the difference between builtins/pipes.
  */
 void	execute_pipeline_command(t_pipe_exec *exec_data)
 {

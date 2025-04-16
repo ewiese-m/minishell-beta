@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:59:26 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 12:39:59 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:33:18 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Checks if an environment variable matches a name
+ * checks if an environment variable matches a name
  */
 static int	is_matching_var(char *env_var, char *name, int len)
 {
@@ -28,7 +28,7 @@ static int	is_matching_var(char *env_var, char *name, int len)
 }
 
 /**
- * Shifts environment entries to remove a variable
+ * shifts environment entries to remove a variable, verify!
  */
 static void	shift_env_entries(char **envp, int start_idx)
 {
@@ -45,7 +45,7 @@ static void	shift_env_entries(char **envp, int start_idx)
 }
 
 /**
- * Safely removes an environment variable
+ * safely removes an environment variable
  */
 static void	safe_remove_from_env(t_minishell *shell, char *name)
 {
@@ -68,7 +68,7 @@ static void	safe_remove_from_env(t_minishell *shell, char *name)
 }
 
 /**
- * Processes a single unset argument
+ * processes a single unset argument
  */
 static int	process_unset_arg(char *arg, t_minishell *shell)
 {
@@ -89,7 +89,7 @@ static int	process_unset_arg(char *arg, t_minishell *shell)
 }
 
 /**
- * Implementation of the unset built-in command
+ * implementation of the unset built-in command
  */
 int	builtin_unset(t_command *cmd, t_minishell *shell)
 {

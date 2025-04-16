@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:11:31 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 10:58:45 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:17 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Handles cleanup and error state in pipeline execution
+ * handles cleanup and error state in pipeline execution
  */
 static int	handle_pipeline_error(t_pipeline *pipeline, pid_t *pids,
 		int executed_count)
@@ -34,7 +34,7 @@ static int	handle_pipeline_error(t_pipeline *pipeline, pid_t *pids,
 }
 
 /**
- * Handles cleanup and returns final status for successful execution
+ * handles cleanup and returns final status for successful execution
  */
 static int	handle_pipeline_success(t_pipeline *pipeline, pid_t *pids)
 {
@@ -51,7 +51,7 @@ static int	handle_pipeline_success(t_pipeline *pipeline, pid_t *pids)
 }
 
 /**
- * Initializes the pipeline execution
+ * initializes the pipeline execution
  */
 int	init_pipeline_execution(t_pipeline *pipeline, pid_t **pids)
 {
@@ -71,7 +71,7 @@ int	init_pipeline_execution(t_pipeline *pipeline, pid_t **pids)
 }
 
 /**
- * Executes a pipeline of commands
+ * executes a pipeline of commands
  */
 int	execute_pipeline(t_pipeline *pipeline, t_minishell *shell)
 {

@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:00:20 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 13:14:15 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:25 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Forks and executes each command in the pipeline
+ * forks and executes each command in the pipeline
  */
 int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
 		t_minishell *shell)
@@ -46,7 +46,7 @@ int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
 }
 
 /**
- * Closes all pipes except those needed for the current command
+ * closes all pipes except those needed for the current command
  */
 void	close_other_pipes(int **pipes, int cmd_index, int cmd_count)
 {

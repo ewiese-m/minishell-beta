@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/30 15:22:24 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:06:44 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:19:14 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "minishell.h"
 
+/* enviroments variables */
 char	**create_env_copy(t_minishell *shell, char **envp);
 void	free_env_array(char **env_array);
 char	**free_list(char **list);

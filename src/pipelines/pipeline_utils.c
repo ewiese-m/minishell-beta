@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:47:13 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/31 22:48:42 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:40:39 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Checks if a command can be executed directly without forking
+ * checks if a command can be executed directly without forking
  */
 int	can_execute_directly(t_pipeline *pipeline)
 {
@@ -24,7 +24,7 @@ int	can_execute_directly(t_pipeline *pipeline)
 }
 
 /**
- * Closes all pipes in the pipeline
+ * closes all pipes in the pipeline
  */
 void	close_all_pipes(t_pipeline *pipeline)
 {
@@ -42,7 +42,7 @@ void	close_all_pipes(t_pipeline *pipeline)
 }
 
 /**
- * Waits for all child processes to complete
+ * waits for all child processes to complete
  */
 int	wait_for_commands(t_pipeline *pipeline, pid_t *pids)
 {

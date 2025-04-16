@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 10:41:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:38:04 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:25:12 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define BUILTINS_H
 
 # include "minishell.h"
+/* the builtins asked */
 
 int		is_builtin(char *cmd);
 int		execute_builtin(t_command *cmd, t_minishell *shell);

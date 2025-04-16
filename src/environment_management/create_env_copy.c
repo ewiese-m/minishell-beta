@@ -6,35 +6,13 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 21:36:57 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/15 16:39:54 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:36:08 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-/*
-static void	init_env_copy(char **env_copy, int size, int extra_space,
-		char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		env_copy[i] = ft_strdup(envp[i]);
-		if (!env_copy[i])
-		{
-			while (--i >= 0)
-				free(env_copy[i]);
-			free(env_copy);
-			return ;
-		}
-		i++;
-	}
-	env_copy[i] = NULL;
-	while (++i < size + extra_space)
-		env_copy[i] = NULL;
-}
+/* Here the env space memory is also created.
  */
 char	**create_env_copy(t_minishell *shell, char **envp)
 {

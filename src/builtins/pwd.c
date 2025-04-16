@@ -6,14 +6,14 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 12:58:50 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/03/26 13:00:45 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/16 14:32:34 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * Implementation of pwd built-in
+ * implementation of pwd built-in
  */
 int	builtin_pwd(void)
 {

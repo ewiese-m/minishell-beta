@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 17:45:36 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/16 15:11:25 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/19 13:40:15 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ int	is_directory(char *path)
 
 char	*check_direct_path(char *cmd)
 {
+	struct stat	file_stat;
+
 	if (ft_strchr(cmd, '/'))
 	{
 		if (is_directory(cmd))
-		{
 			handle_is_a_directory(cmd);
-		}
+		if (stat(cmd, &file_stat) == 0 && !is_executable(cmd))
+			exit(handle_permission_denied(cmd));
 		if (is_executable(cmd))
 			return (ft_strdup(cmd));
 		return (NULL);
@@ -49,6 +51,29 @@ char	*check_direct_path(char *cmd)
 	return (NULL);
 }
 
+/*
+char	*check_direct_path(char *cmd)
+{
+	struct stat	file_stat;
+
+	if (ft_strchr(cmd, '/'))
+	{
+		if (is_directory(cmd))
+		{
+			handle_is_a_directory(cmd);
+		}
+		if (stat(cmd, &file_stat) == 0 && !is_executable(cmd))
+		{
+			handle_permission_denied(cmd);
+			exit(126);
+		}
+		if (is_executable(cmd))
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
+	return (NULL);
+}
+ */
 void	free_path_array(char **paths)
 {
 	int	i;

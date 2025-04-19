@@ -80,12 +80,11 @@ SRCS = $(SRC_DIR)/main/main.c \
        $(SRC_DIR)/path_resolution/path_resolution.c \
        $(SRC_DIR)/path_resolution/path_utils.c \
        $(SRC_DIR)/path_resolution/error_handling.c \
-       $(SRC_DIR)/pipelines/execute_pipeline_command.c \
-       $(SRC_DIR)/pipelines/pipeline.c \
        $(SRC_DIR)/pipelines/pipeline_creation.c \
+       $(SRC_DIR)/pipelines/pipeline_execute_command.c \
        $(SRC_DIR)/pipelines/pipeline_execution.c \
-       $(SRC_DIR)/pipelines/pipeline_redirections.c \
-       $(SRC_DIR)/pipelines/pipelines_utils.c \
+       $(SRC_DIR)/pipelines/pipeline_fork_and_close.c \
+       $(SRC_DIR)/pipelines/pipeline_free.c \
        $(SRC_DIR)/pipelines/pipeline_utils.c \
        $(SRC_DIR)/redirections/heredoc.c \
        $(SRC_DIR)/redirections/input_redirection.c \

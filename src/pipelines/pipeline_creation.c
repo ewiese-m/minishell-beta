@@ -6,40 +6,69 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 14:13:50 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/16 14:42:00 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:33:51 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-/**
- * creates pipes for the pipeline
- */
-int	**create_pipes(int cmd_count)
+static int	count_commands(t_command *cmd)
 {
-	int	**pipes;
-	int	i;
+	int			count;
+	t_command	*current;
 
-	if (cmd_count <= 1)
-		return (NULL);
-	pipes = (int **)malloc(sizeof(int *) * (cmd_count - 1));
-	if (!pipes)
-		return (NULL);
-	i = 0;
-	while (i < cmd_count - 1)
+	count = 0;
+	current = cmd;
+	while (current)
 	{
-		pipes[i] = (int *)malloc(sizeof(int) * 2);
-		if (!pipes[i])
-		{
-			free_pipes(pipes, i);
-			return (NULL);
-		}
-		if (pipe(pipes[i]) == -1)
-		{
-			free_pipes(pipes, i + 1);
-			return (NULL);
-		}
-		i++;
+		count++;
+		current = current->next;
 	}
-	return (pipes);
+	return (count);
+}
+
+/**
+ * Initialize the pipeline structure
+ */
+static t_pipeline	*init_pipeline(t_command *cmd_list)
+{
+	t_pipeline	*pipeline;
+
+	if (!cmd_list)
+		return (NULL);
+	pipeline = (t_pipeline *)malloc(sizeof(t_pipeline));
+	if (!pipeline)
+		return (NULL);
+	pipeline->cmd_count = count_commands(cmd_list);
+	pipeline->commands = (t_command **)malloc(sizeof(t_command *)
+			* pipeline->cmd_count);
+	if (!pipeline->commands)
+	{
+		free(pipeline);
+		return (NULL);
+	}
+	pipeline->pipes = NULL;
+	return (pipeline);
+}
+
+/**
+ * Create a pipeline structure from a linked list of commands
+ */
+t_pipeline	*create_pipeline(t_command *cmd_list)
+{
+	t_pipeline	*pipeline;
+	t_command	*current;
+	int			i;
+
+	pipeline = init_pipeline(cmd_list);
+	if (!pipeline)
+		return (NULL);
+	current = cmd_list;
+	i = 0;
+	while (current)
+	{
+		pipeline->commands[i++] = current;
+		current = current->next;
+	}
+	return (pipeline);
 }

@@ -6,25 +6,36 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 15:47:13 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/17 17:23:31 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/19 11:29:09 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 /**
- * checks if a command can be executed directly without forking
+ * Free pipe file descriptors
  */
-int	can_execute_directly(t_pipeline *pipeline)
+void	free_pipes(int **pipes, int pipe_count)
 {
-	return (pipeline->cmd_count == 1
-		&& is_builtin(pipeline->commands[0]->command)
-		&& pipeline->commands[0]->input == 0
-		&& pipeline->commands[0]->output == 1);
+	int	i;
+
+	if (!pipes)
+		return ;
+	i = 0;
+	while (i < pipe_count)
+	{
+		if (pipes[i])
+		{
+			free(pipes[i]);
+			pipes[i] = NULL;
+		}
+		i++;
+	}
+	free(pipes);
 }
 
 /**
- * closes all pipes in the pipeline
+ * Close all pipes in the pipeline
  */
 void	close_all_pipes(t_pipeline *pipeline)
 {
@@ -42,10 +53,10 @@ void	close_all_pipes(t_pipeline *pipeline)
 }
 
 /**
- * waits for all child processes to complete
+ * Extract exit status from process termination status
+ * Merci massimo for the tip.
  */
-
-static int	parse_raw_exit_status_massimo(int status)
+static int	parse_exit_status_grazie_massimo(int status)
 {
 	if (WIFEXITED(status))
 		return (WEXITSTATUS(status));
@@ -54,6 +65,10 @@ static int	parse_raw_exit_status_massimo(int status)
 	return (1);
 }
 
+/**
+ * Wait for all child processes to complete
+ * and return the last command's exit status
+ */
 int	wait_for_commands(t_pipeline *pipeline, pid_t *pids)
 {
 	int	i;
@@ -67,7 +82,7 @@ int	wait_for_commands(t_pipeline *pipeline, pid_t *pids)
 		if (waitpid(pids[i], &status, 0) == -1)
 			handle_wait_error();
 		else if (i == pipeline->cmd_count - 1)
-			last_status = parse_raw_exit_status_massimo(status);
+			last_status = parse_exit_status_grazie_massimo(status);
 		i++;
 	}
 	return (last_status);

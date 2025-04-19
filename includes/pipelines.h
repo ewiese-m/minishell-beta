@@ -6,7 +6,7 @@
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 13:18:47 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/16 14:22:47 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/19 10:46:29 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,17 @@
 
 # include "minishell.h"
 
-/* pipelines functions */
-
+/* Pipeline structure functions */
 t_pipeline	*create_pipeline(t_command *cmd_list);
 void		free_pipeline(t_pipeline *pipeline);
-void		free_pipes(int **pipes, int pipe_count);
-int			**create_pipes(int cmd_count);
-int			init_pipeline_execution(t_pipeline *pipeline, pid_t **pids);
+
+/* Pipeline execution functions */
 int			execute_pipeline(t_pipeline *pipeline, t_minishell *shell);
-int			can_execute_directly(t_pipeline *pipeline);
+void		execute_pipeline_command(t_pipe_exec *exec_data);
+
+/* Pipeline utility functions */
+void		free_pipes(int **pipes, int pipe_count);
 void		close_all_pipes(t_pipeline *pipeline);
 int			wait_for_commands(t_pipeline *pipeline, pid_t *pids);
-int			fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
-				t_minishell *shell);
 
 #endif

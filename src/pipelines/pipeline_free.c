@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipelines_utils.c                                  :+:      :+:    :+:   */
+/*   pipeline_free.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/26 13:16:09 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/02 17:46:26 by ewiese-m         ###   ########.fr       */
+/*   Created: 2025/03/26 13:48:33 by ewiese-m          #+#    #+#             */
+/*   Updated: 2025/04/19 11:08:21 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_pipes(int **pipes, int pipe_count)
+/**
+ * Free a pipeline structure
+ */
+void	free_pipeline(t_pipeline *pipeline)
 {
-	int	i;
-
-	if (!pipes)
+	if (!pipeline)
 		return ;
-	i = 0;
-	while (i < pipe_count)
+	if (pipeline->commands)
+		free(pipeline->commands);
+	if (pipeline->pipes)
 	{
-		if (pipes[i])
-		{
-			free(pipes[i]);
-			pipes[i] = NULL;
-		}
-		i++;
+		free_pipes(pipeline->pipes, pipeline->cmd_count - 1);
+		pipeline->pipes = NULL;
 	}
-	free(pipes);
+	free(pipeline);
 }

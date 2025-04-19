@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipeline_fork_execute_close.c                      :+:      :+:    :+:   */
+/*   pipeline_fork_and_close.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ewiese-m <ewiese-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/08 12:00:20 by ewiese-m          #+#    #+#             */
-/*   Updated: 2025/04/19 10:58:03 by ewiese-m         ###   ########.fr       */
+/*   Updated: 2025/04/19 12:36:37 by ewiese-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
+#include "../../includes/minishell.h"
 /**
  * forks and executes each command in the pipeline
- */
+
 int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
 		t_minishell *shell)
 {
@@ -44,6 +43,7 @@ int	fork_and_execute_commands(t_pipeline *pipeline, pid_t *pids,
 	}
 	return (i);
 }
+ */
 
 /**
  * closes all pipes except those needed for the current command
